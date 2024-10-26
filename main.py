@@ -6,8 +6,8 @@ import numpy as np
 def main():
     # Make a Basis object. There are some presets available in the `utils`.
     #basis = dg.utils.surface_with_n_rotsym(7, centred=True)   # 2D structure with 7-fold rotational symmetry
-    basis = dg.utils.penrose_basis()          # Section of Penrose tiling.
-    # basis = dg.utils.icosahedral_basis()      # 3D quasicrystalline structure
+    # basis = dg.utils.penrose_basis()          # Section of Penrose tiling.
+    basis = dg.utils.icosahedral_basis()      # 3D quasicrystalline structure
     #basis = dg.utils.n_dimensional_cubic_basis(4) # 4D cubic structure
     
     print("OFFSETS:", basis.offsets)
@@ -117,6 +117,9 @@ def main():
     # - longitudes=8. Number of longitudes on hemisphere caps on the rods. Higher -> slower to generate,
     #                 higher quality corners, bigger file. Should be >= 2
     dg.utils.export_graph_to_stl(G, "graph_out.stl", 0.1)
+    
+    # After generating and filtering cells, add:
+    dg.utils.export_cells_to_json(cells, "cells_out.json")
     print("DONE :)")
 
 

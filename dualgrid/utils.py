@@ -9,6 +9,7 @@ import time
 import networkx as nx
 from multiprocessing import Pool
 from functools import partial
+import json
 
 """ OFFSET generation
 """
@@ -573,3 +574,28 @@ def _export_graph_to_stl_single_core(G, filepath, rod_radius, **kwargs):
         c.write(fo)
 
     fo.close()
+
+def cells_to_dict(cells):
+    """
+    Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
+    """
+    return {
+        'cells': [{
+            'vertices': [v.tolist() for v in cell.verts],
+            'indices': [i.tolist() for i in cell.indices],
+            'intersection': cell.intersection.tolist()
+        } for cell in cells]
+    }
+
+def export_cells_to_json(cells, filepath):
+    """
+    Saves the cells to a JSON file.
+    
+    Args:
+        cells: List of Cell objects to export
+        filepath: Path to save the JSON file
+    """
+    data = cells_to_dict(cells)
+    
+    with open(filepath, 'w') as f:
+        json.dump(data, f, indent=2)
