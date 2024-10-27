@@ -1,7 +1,7 @@
 .idea/
 __pycache__
 *.stl
-cells_out.json
+*.json
 stl_test_new*
 benchmarks/
 tests/testout/*.pdf
