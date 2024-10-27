@@ -53,13 +53,18 @@
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
 
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0x404040);
-            scene.add(ambientLight);
+            // Remove lighting setup
+            // const ambientLight = new THREE.AmbientLight(0x404040);
+            // scene.add(ambientLight);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
+            // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            // directionalLight.position.set(1, 1, 1);
+            // scene.add(directionalLight);
+
+            // Add an additional light
+            const pointLight = new THREE.PointLight(0xffaa00, 0.5); // Orange light
+            pointLight.position.set(-5, -5, 5); // Position it elsewhere in the scene
+            scene.add(pointLight);
 
             // Add raycaster setup
             raycaster = new THREE.Raycaster();
@@ -67,6 +72,9 @@
 
             // Add mouse move event listener
             renderer.domElement.addEventListener('mousemove', onMouseMove, false);
+
+            // Add mouse click event listener
+            renderer.domElement.addEventListener('click', onMouseClick, false);
 
             // Handle window resize
             window.addEventListener('resize', onWindowResize, false);
@@ -104,7 +112,10 @@
             // Reset all materials and remove ghost cell
             scene.children.forEach(child => {
                 if (child instanceof THREE.Mesh && child !== hoverSphere) {
-                    child.material.emissive.setHex(0x000000);
+                    // Check if the material has an emissive property
+                    if (child.material.isMeshStandardMaterial || child.material.isMeshLambertMaterial) {
+                        child.material.emissive.setHex(0x000000);
+                    }
                 }
             });
             if (ghostCell) {
@@ -116,7 +127,10 @@
             if (intersects.length > 0) {
                 const intersected = intersects[0].object;
                 if (intersected !== hoverSphere) {
-                    intersected.material.emissive.setHex(0x333333);
+                    // Check if the material has an emissive property
+                    if (intersected.material.isMeshStandardMaterial || intersected.material.isMeshLambertMaterial) {
+                        intersected.material.emissive.setHex(0x333333);
+                    }
                     
                     // Calculate triangle center
                     const face = intersects[0].face;
@@ -157,7 +171,7 @@
                         console.log('Other Cell Data:', otherCell);
                         
                         if (otherCell && !otherCell.filled) {
-                            ghostCell = createRhomb(otherCell.vertices, otherCell.face_indices, 0x44aa88, true);
+                            ghostCell = createRhomb(otherCell.vertices, otherCell.face_indices, 0x808080, true);
                             ghostCell.userData.uuid = otherUUID;
                             scene.add(ghostCell);
                         }
@@ -177,7 +191,28 @@
             }
         }
 
-        function createRhomb(vertices, faceIndices, color = 0x44aa88, isGhost = false) {
+        function onMouseClick(event) {
+            // Check if there's a ghost cell
+            if (ghostCell) {
+                // Fill the ghost cell
+                const uuid = ghostCell.userData.uuid;
+                const cellData = jsonData.cells[uuid];
+                
+                if (cellData && !cellData.filled) {
+                    cellData.filled = true; // Mark the cell as filled
+                    scene.remove(ghostCell); // Remove the ghost cell
+
+                    // Create a filled rhomb and add it to the scene
+                    const filledRhomb = createRhomb(cellData.vertices, cellData.face_indices, 0x808080, false);
+                    filledRhomb.userData.uuid = uuid;
+                    scene.add(filledRhomb);
+
+                    ghostCell = null; // Reset the ghost cell
+                }
+            }
+        }
+
+        function createRhomb(vertices, faceIndices, color = 0x808080, isGhost = false) {
             const geometry = new THREE.BufferGeometry();
             
             const positions = vertices.flat();
@@ -190,15 +225,25 @@
             });
             geometry.setIndex(indices);
             
-            // Create separate vertices for each face to get flat shading
+            // Compute normals and use them for coloring
             geometry.computeVertexNormals();
             const flatGeometry = geometry.toNonIndexed();
             flatGeometry.computeVertexNormals();
 
-            const material = new THREE.MeshLambertMaterial({
-                color: color,
-                transparent: true,
-                opacity: isGhost ? 0.3 : 0.8,
+            // Create colors based on normals
+            const normals = flatGeometry.getAttribute('normal');
+            const colors = [];
+            for (let i = 0; i < normals.count; i++) {
+                const normal = new THREE.Vector3().fromBufferAttribute(normals, i);
+                const color = new THREE.Color().setRGB(normal.x, normal.y, normal.z).multiplyScalar(0.5).addScalar(0.5);
+                colors.push(color.r, color.g, color.b);
+            }
+            flatGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.MeshBasicMaterial({
+                vertexColors: true, // Use vertex colors
+                transparent: isGhost,
+                opacity: isGhost ? 0.3 : 1,
                 side: THREE.DoubleSide,
                 flatShading: true
             });
