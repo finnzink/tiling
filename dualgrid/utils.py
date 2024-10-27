@@ -576,12 +576,26 @@ def _export_graph_to_stl_single_core(G, filepath, rod_radius, **kwargs):
 
     fo.close()
 
+def to_native(obj):
+    """Convert numpy types to native Python types recursively."""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return [to_native(item) for item in obj]
+    elif isinstance(obj, list):
+        return [to_native(item) for item in obj]
+    elif isinstance(obj, dict):
+        return {key: to_native(value) for key, value in obj.items()}
+    return obj
+
 def cells_to_dict(cells):
     """
     Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
     Includes cells (indexed by UUID) and triangles (indexed by triangle center position).
     """
-    # Define face indices for 3D rhombohedron
+    # Define face indices for 3D rhombohedron (initial configuration)
     FACE_INDICES = np.array([
         [0, 2, 3, 1],  # front
         [0, 1, 5, 4],  # right
@@ -597,20 +611,44 @@ def cells_to_dict(cells):
         'triangles': {} # Will be indexed by triangle center position string
     }
     
+    def analyze_and_adjust_triangulation(vertices, face_indices):
+        """Determine triangulation type and adjust if using long diagonal."""
+        v0, v1, v2, v3 = vertices
+        diag1 = np.linalg.norm(v2 - v0)
+        diag2 = np.linalg.norm(v3 - v1)
+        if diag1 > diag2:
+            # Long diagonal detected, swap to use short diagonal
+            return [face_indices[1], face_indices[2], face_indices[3], face_indices[0]]
+        return face_indices
+
     # Process each cell
     for i, cell in enumerate(cells):
         cell_uuid = str(uuid.uuid4())
         
         # Add cell to cells dict
         result['cells'][cell_uuid] = {
-            'vertices': [v.tolist() for v in cell.verts],
-            'indices': [i.tolist() for i in cell.indices],
-            'intersection': cell.intersection.tolist(),
-            'filled': i == 0  # True for first cell only
+            'vertices': to_native(cell.verts),
+            'indices': to_native(cell.indices),
+            'intersection': to_native(cell.intersection),
+            'filled': i == 0,
+            'face_indices': []
         }
         
-        # Process faces/triangles
-        for face_indices in FACE_INDICES:
+        # Analyze and adjust triangulation for all cells
+        adjusted_face_indices = []
+        if i == 0:
+            print(f"Triangulation analysis and adjustment for first cell (UUID: {cell_uuid}):")
+        
+        for face_index, face_indices in enumerate(FACE_INDICES):
+            face_vertices = [cell.verts[idx] for idx in face_indices]
+            adjusted_indices = analyze_and_adjust_triangulation(face_vertices, face_indices)
+            adjusted_face_indices.append(adjusted_indices)
+            
+            # Add the adjusted face indices to the cell data
+            result['cells'][cell_uuid]['face_indices'].append(to_native(adjusted_indices))
+        
+        # Use the adjusted face indices for triangle generation
+        for face_indices in adjusted_face_indices:
             # Each face is split into two triangles
             triangles = [
                 [face_indices[0], face_indices[1], face_indices[2]],  # First triangle
@@ -624,13 +662,12 @@ def cells_to_dict(cells):
                 # Calculate triangle center
                 tri_center = np.mean(tri_verts, axis=0)
                 # Round the values before creating the key
-                tri_center = np.round(tri_center, decimals=6)
-                tri_center_key = ','.join(f"{x:.6f}" for x in tri_center)
+                tri_center_key = ','.join(f"{x:.2f}" for x in to_native(tri_center))
                 
                 # Add or update triangle entry
                 if tri_center_key not in result['triangles']:
                     result['triangles'][tri_center_key] = {
-                        'center': tri_center.tolist(),
+                        'center': to_native(tri_center),
                         'cells': [cell_uuid]
                     }
                 else:
@@ -638,7 +675,7 @@ def cells_to_dict(cells):
                     if cell_uuid not in result['triangles'][tri_center_key]['cells']:
                         result['triangles'][tri_center_key]['cells'].append(cell_uuid)
 
-    return result
+    return to_native(result)
 
 def export_cells_to_json(cells, filepath):
     """
@@ -652,7 +689,4 @@ def export_cells_to_json(cells, filepath):
     
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
-
-
-
 
