@@ -17,7 +17,6 @@
     </style>
 </head>
 <body>
-    <input type="file" id="fileInput" accept=".json">
     <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
     <script type="importmap">
     {
@@ -31,7 +30,7 @@
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-        let scene, camera, renderer, controls;
+        let scene, camera, renderer, controls, raycaster, mouse;
 
         function init() {
             // Scene setup
@@ -59,10 +58,42 @@
             directionalLight.position.set(1, 1, 1);
             scene.add(directionalLight);
 
+            // Add raycaster setup
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // Add mouse move event listener
+            renderer.domElement.addEventListener('mousemove', onMouseMove, false);
+
             // Handle window resize
             window.addEventListener('resize', onWindowResize, false);
 
             animate();
+        }
+
+        function onMouseMove(event) {
+            // Calculate mouse position in normalized device coordinates
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            // Update the picking ray with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+
+            // Calculate objects intersecting the picking ray
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            // Reset all materials to their original state
+            scene.children.forEach(child => {
+                if (child instanceof THREE.Mesh) {
+                    child.material.emissive.setHex(0x000000);
+                }
+            });
+
+            // Highlight intersected object
+            if (intersects.length > 0) {
+                const intersected = intersects[0].object;
+                intersected.material.emissive.setHex(0x333333);
+            }
         }
 
         function createRhomb(vertices, color = 0x44aa88) {
@@ -93,16 +124,22 @@
             const positions = vertices.flat();
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
             geometry.setIndex(indices);
+            
+            // Create separate vertices for each face to get flat shading
+            geometry.deleteAttribute('normal');
             geometry.computeVertexNormals();
+            const flatGeometry = geometry.toNonIndexed(); // Store in new variable instead of reassigning
+            flatGeometry.computeVertexNormals();
 
-            const material = new THREE.MeshPhongMaterial({
+            const material = new THREE.MeshLambertMaterial({
                 color: color,
                 transparent: true,
                 opacity: 0.8,
-                side: THREE.DoubleSide
+                side: THREE.DoubleSide,
+                flatShading: true
             });
 
-            return new THREE.Mesh(geometry, material);
+            return new THREE.Mesh(flatGeometry, material);
         }
 
         function loadCells(jsonData) {
@@ -111,12 +148,19 @@
 
             const cells = jsonData.cells;
             const colorMap = new THREE.Color();
-
-            cells.forEach((cell, index) => {
-                // Generate a color based on the cell's index
-                colorMap.setHSL(index / cells.length, 0.5, 0.5);
-                const rhomb = createRhomb(cell.vertices, colorMap.getHex());
-                scene.add(rhomb);
+            
+            // Convert cells object to array for color mapping
+            const cellEntries = Object.entries(cells);
+            
+            cellEntries.forEach(([uuid, cell], index) => {
+                // Only create and add cells that are filled
+                if (cell.filled) {
+                    // Generate a color based on the cell's index
+                    colorMap.setHSL(index / cellEntries.length, 0.5, 0.5);
+                    const rhomb = createRhomb(cell.vertices, colorMap.getHex());
+                    rhomb.userData.uuid = uuid;  // Store the uuid in the mesh for later reference
+                    scene.add(rhomb);
+                }
             });
 
             // Reset camera position to view all cells

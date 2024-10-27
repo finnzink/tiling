@@ -10,6 +10,7 @@ import networkx as nx
 from multiprocessing import Pool
 from functools import partial
 import json
+import uuid  # Add this import at the top
 
 """ OFFSET generation
 """
@@ -578,14 +579,57 @@ def _export_graph_to_stl_single_core(G, filepath, rod_radius, **kwargs):
 def cells_to_dict(cells):
     """
     Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
+    Includes cells (indexed by UUID) and edges (indexed by face center position).
     """
-    return {
-        'cells': [{
+    # Define face indices for 3D rhombohedron (same as in _render_cells_solid_3D)
+    FACE_INDICES = np.array([
+        [0, 2, 3, 1],
+        [0, 1, 5, 4],
+        [5, 7, 6, 4],
+        [2, 6, 7, 3],
+        [0, 4, 6, 2],
+        [3, 7, 5, 1]
+    ])
+
+    # Initialize output structure
+    result = {
+        'cells': {},  # Will be indexed by UUID
+        'faces': {}   # Will be indexed by face center position string
+    }
+    
+    # Process each cell
+    for i, cell in enumerate(cells):
+        cell_uuid = str(uuid.uuid4())
+        
+        # Add cell to cells dict
+        result['cells'][cell_uuid] = {
             'vertices': [v.tolist() for v in cell.verts],
             'indices': [i.tolist() for i in cell.indices],
-            'intersection': cell.intersection.tolist()
-        } for cell in cells]
-    }
+            'intersection': cell.intersection.tolist(),
+            'filled': i == 0  # True for first cell only
+        }
+        
+        # Process faces/edges
+        for face_indices in FACE_INDICES:
+            # Get vertices for this face
+            face_verts = [cell.verts[idx] for idx in face_indices]
+            
+            # Calculate face center (will be used as key)
+            face_center = np.mean(face_verts, axis=0)
+            face_center_key = ','.join(f"{x:.6f}" for x in face_center)
+            
+            # Add or update edge entry
+            if face_center_key not in result['faces']:
+                result['faces'][face_center_key] = {
+                    'center': face_center.tolist(),
+                    'cells': [cell_uuid]
+                }
+            else:
+                # Add this cell to existing edge if it's not already there
+                if cell_uuid not in result['faces'][face_center_key]['cells']:
+                    result['faces'][face_center_key]['cells'].append(cell_uuid)
+
+    return result
 
 def export_cells_to_json(cells, filepath):
     """
@@ -599,3 +643,5 @@ def export_cells_to_json(cells, filepath):
     
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
+
+
