@@ -579,22 +579,22 @@ def _export_graph_to_stl_single_core(G, filepath, rod_radius, **kwargs):
 def cells_to_dict(cells):
     """
     Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
-    Includes cells (indexed by UUID) and edges (indexed by face center position).
+    Includes cells (indexed by UUID) and triangles (indexed by triangle center position).
     """
-    # Define face indices for 3D rhombohedron (same as in _render_cells_solid_3D)
+    # Define face indices for 3D rhombohedron
     FACE_INDICES = np.array([
-        [0, 2, 3, 1],
-        [0, 1, 5, 4],
-        [5, 7, 6, 4],
-        [2, 6, 7, 3],
-        [0, 4, 6, 2],
-        [3, 7, 5, 1]
+        [0, 2, 3, 1],  # front
+        [0, 1, 5, 4],  # right
+        [5, 7, 6, 4],  # back
+        [2, 6, 7, 3],  # left
+        [0, 4, 6, 2],  # top
+        [3, 7, 5, 1]   # bottom
     ])
 
     # Initialize output structure
     result = {
-        'cells': {},  # Will be indexed by UUID
-        'faces': {}   # Will be indexed by face center position string
+        'cells': {},    # Will be indexed by UUID
+        'triangles': {} # Will be indexed by triangle center position string
     }
     
     # Process each cell
@@ -609,25 +609,34 @@ def cells_to_dict(cells):
             'filled': i == 0  # True for first cell only
         }
         
-        # Process faces/edges
+        # Process faces/triangles
         for face_indices in FACE_INDICES:
-            # Get vertices for this face
-            face_verts = [cell.verts[idx] for idx in face_indices]
+            # Each face is split into two triangles
+            triangles = [
+                [face_indices[0], face_indices[1], face_indices[2]],  # First triangle
+                [face_indices[0], face_indices[2], face_indices[3]]   # Second triangle
+            ]
             
-            # Calculate face center (will be used as key)
-            face_center = np.mean(face_verts, axis=0)
-            face_center_key = ','.join(f"{x:.6f}" for x in face_center)
-            
-            # Add or update edge entry
-            if face_center_key not in result['faces']:
-                result['faces'][face_center_key] = {
-                    'center': face_center.tolist(),
-                    'cells': [cell_uuid]
-                }
-            else:
-                # Add this cell to existing edge if it's not already there
-                if cell_uuid not in result['faces'][face_center_key]['cells']:
-                    result['faces'][face_center_key]['cells'].append(cell_uuid)
+            for triangle in triangles:
+                # Get vertices for this triangle
+                tri_verts = [cell.verts[idx] for idx in triangle]
+                
+                # Calculate triangle center
+                tri_center = np.mean(tri_verts, axis=0)
+                # Round the values before creating the key
+                tri_center = np.round(tri_center, decimals=6)
+                tri_center_key = ','.join(f"{x:.6f}" for x in tri_center)
+                
+                # Add or update triangle entry
+                if tri_center_key not in result['triangles']:
+                    result['triangles'][tri_center_key] = {
+                        'center': tri_center.tolist(),
+                        'cells': [cell_uuid]
+                    }
+                else:
+                    # Add this cell to existing triangle if it's not already there
+                    if cell_uuid not in result['triangles'][tri_center_key]['cells']:
+                        result['triangles'][tri_center_key]['cells'].append(cell_uuid)
 
     return result
 
@@ -643,5 +652,7 @@ def export_cells_to_json(cells, filepath):
     
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
+
+
 
 
