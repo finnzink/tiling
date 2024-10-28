@@ -611,19 +611,45 @@ def cells_to_dict(cells):
         'triangles': {} # Will be indexed by triangle center position string
     }
     
-    def analyze_and_adjust_triangulation(vertices, face_indices):
-        """Determine triangulation type and adjust if using long diagonal."""
+    def calculate_face_normal(vertices):
+        """Calculate normal vector for a face using first three vertices."""
+        v0, v1, v2 = vertices[:3]
+        edge1 = v1 - v0
+        edge2 = v2 - v0
+        normal = np.cross(edge1, edge2)
+        return normal / np.linalg.norm(normal)
+
+    def face_needs_flip(vertices, cell_center):
+        """Check if face normal points outward from cell center."""
+        normal = calculate_face_normal(vertices)
+        face_center = np.mean(vertices, axis=0)
+        direction_from_center = face_center - cell_center
+        # If dot product is negative, normal points inward
+        return np.dot(normal, direction_from_center) < 0
+
+    def analyze_and_adjust_triangulation(vertices, face_indices, cell_center):
+        """Determine triangulation type and adjust orientation if needed."""
         v0, v1, v2, v3 = vertices
         diag1 = np.linalg.norm(v2 - v0)
         diag2 = np.linalg.norm(v3 - v1)
+        
+        # First determine which diagonal to use
         if diag1 > diag2:
-            # Long diagonal detected, swap to use short diagonal
-            return [face_indices[1], face_indices[2], face_indices[3], face_indices[0]]
+            # Use short diagonal (v1-v3)
+            face_indices = [face_indices[1], face_indices[2], face_indices[3], face_indices[0]]
+            vertices = [vertices[1], vertices[2], vertices[3], vertices[0]]
+        
+        # Check if face needs to be flipped
+        if face_needs_flip(vertices, cell_center):
+            # Reverse vertex order to flip face orientation
+            return [face_indices[0], face_indices[3], face_indices[2], face_indices[1]]
+        
         return face_indices
 
     # Process each cell
     for i, cell in enumerate(cells):
         cell_uuid = str(uuid.uuid4())
+        cell_center = np.mean(cell.verts, axis=0)
         
         # Add cell to cells dict
         result['cells'][cell_uuid] = {
@@ -641,7 +667,11 @@ def cells_to_dict(cells):
         
         for face_index, face_indices in enumerate(FACE_INDICES):
             face_vertices = [cell.verts[idx] for idx in face_indices]
-            adjusted_indices = analyze_and_adjust_triangulation(face_vertices, face_indices)
+            adjusted_indices = analyze_and_adjust_triangulation(
+                face_vertices, 
+                face_indices, 
+                cell_center
+            )
             adjusted_face_indices.append(adjusted_indices)
             
             # Add the adjusted face indices to the cell data
