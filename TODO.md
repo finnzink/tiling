@@ -1,4 +1,5 @@
-click drag shouldn't count as an add
 remove support
 hosting
-chunks?
+chunks? noise generated infinite terrain?
+remove inside faces for perf?
+whittle down python to replace with c++ (or zig) eventually 
