@@ -64,43 +64,6 @@ def icosahedral_basis(random_offsets=True, **kwargs):
     icos.append(np.array([0.0, 0.0, 1.0]))
     return dg.Basis(np.array(icos), offsets)
 
-def n_dimensional_cubic_basis(dims, random_offsets=True, **kwargs):
-    """
-    Returns an N-dimensional cubic basis.
-    dims: N
-    """
-    offsets = generate_offsets(dims, random_offsets, **kwargs)
-    basis_vecs = np.asarray(np.eye(dims))
-    return dg.Basis(basis_vecs, offsets)
-
-def cubic_basis(random_offsets=True, **kwargs):
-    return n_dimensional_cubic_basis(3, random_offsets=random_offsets, **kwargs)
-
-
-def surface_with_n_rotsym(n, random_offsets=True, **kwargs):
-    """
-    Basis for generating a 2D structure with `n` rotational symmetry.
-    """
-    N = n
-    if n % 2 == 0:
-        n //= 2
-
-    vecs = np.array([[np.cos(j * np.pi * 2.0/N), np.sin(j * np.pi * 2.0/N)] for j in range(n)])
-
-    offsets = generate_offsets(n, random_offsets, **kwargs)
-
-    return dg.Basis(vecs, offsets)
-
-def penrose_basis(random_offsets=True, **kwargs):
-    return surface_with_n_rotsym(5, sum_zero=True, below_one=True, random_offsets=random_offsets, **kwargs)
-
-def hexagonal_basis(random_offsets=True, **kwargs):
-    return dg.Basis(np.array([
-        np.array([1.0, 0.0, 0.0]),
-        np.array([1.0/2.0, np.sqrt(3)/2.0, 0.0]),
-        np.array([0.0, 0.0, 1.0]),
-    ]), generate_offsets(3, random_offsets, **kwargs))
-
 
 """ Filtering functions. Must take form (point, filter_centre, param_1, param_2, ..., param_N)
 """
@@ -544,7 +507,7 @@ def to_native(obj):
 def cells_to_dict(cells):
     """
     Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
-    Includes cells (indexed by UUID) and triangles (indexed by triangle center position).
+    Includes cells (indexed by UUID), triangles (indexed by triangle center position), and COI.
     """
     # Define face indices for 3D rhombohedron (initial configuration)
     FACE_INDICES = np.array([
@@ -559,7 +522,8 @@ def cells_to_dict(cells):
     # Initialize output structure
     result = {
         'cells': {},    # Will be indexed by UUID
-        'triangles': {} # Will be indexed by triangle center position string
+        'triangles': {},  # Will be indexed by triangle center position string
+        'center_of_interest': to_native(get_centre_of_interest(cells))  # Add COI to output
     }
     
     def calculate_face_normal(vertices):

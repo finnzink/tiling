@@ -162,28 +162,19 @@ class Cell:
 
     def is_in_filter(self, *args, **kwargs):
         """
-        Utility function for checking whever the rhombohedron is in rendering distance
-        `fast` just checks the first vertex and exits, otherwise if any of the vertices are inside the filter
-        then the whole cell is inside filter
+        Utility function for checking whether the cell's center is in rendering distance.
+        Uses average of all vertices as the cell's center point.
         """
         def run_filter(filter, filter_centre, filter_args=[], filter_indices=False, fast=False, invert_filter=False):
-            if fast:
-                if filter_indices:
-                    return filter(self.indices[0], np.zeros_like(self.indices), *filter_args)
-                else:
-                    return filter(self.verts[0], filter_centre, *filter_args)
+            if filter_indices:
+                # For index-based filtering, use average of indices
+                center = np.mean(self.indices, axis=0)
+                zero_centre = np.zeros_like(center)
+                return filter(center, zero_centre, *filter_args)
             else:
-                if filter_indices:
-                    zero_centre = np.zeros_like(self.indices)
-                    for i in self.indices:
-                        if filter(i, zero_centre, *filter_args):
-                            return True
-                    return False
-                else:
-                    for v in self.verts:
-                        if filter(v, filter_centre, *filter_args):
-                            return True
-                    return False
+                # For position-based filtering, use average of vertices
+                center = np.mean(self.verts, axis=0)
+                return filter(center, filter_centre, *filter_args)
         
         result = run_filter(*args, **kwargs)
         if kwargs["invert_filter"]:

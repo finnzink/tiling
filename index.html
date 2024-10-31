@@ -34,6 +34,8 @@
         let scene, camera, renderer, controls, raycaster, mouse, jsonData;
         let hoverSphere;
         let ghostCell = null;
+        let coiSphere = null;
+        let coiBox = null;
 
         // Add these variables with other globals
         let isMouseDragging = false;
@@ -95,6 +97,20 @@
             hoverSphere.visible = false;
             hoverSphere.renderOrder = 999; // Ensure it renders last
             scene.add(hoverSphere);
+
+            // Create COI sphere with larger radius and blue color
+            const coiGeometry = new THREE.SphereGeometry(0.1);
+            const coiMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0x0000ff,
+                transparent: true,
+                opacity: 0.8,
+                depthTest: false,
+                side: THREE.DoubleSide
+            });
+            coiSphere = new THREE.Mesh(coiGeometry, coiMaterial);
+            coiSphere.visible = false;  // Hide initially until data loads
+            coiSphere.renderOrder = 999;
+            scene.add(coiSphere);
 
             animate();
         }
@@ -270,9 +286,12 @@
             // Store the data globally
             jsonData = data;
             
+            console.log('Loading data:', data); // Debug log
+            console.log('Center of interest:', data.center_of_interest); // Debug log
+            
             // Clear existing cells but keep the hover sphere
             scene.children = scene.children.filter(child => 
-                !(child instanceof THREE.Mesh) || child === hoverSphere
+                !(child instanceof THREE.Mesh) || child === hoverSphere || child === coiSphere
             );
 
             const cells = data.cells;
@@ -298,6 +317,30 @@
             camera.position.set(center.x + maxDim, center.y + maxDim, center.z + maxDim);
             camera.lookAt(center);
             controls.target.copy(center);
+
+            // Add COI sphere and box if center_of_interest exists in the data
+            if (data.center_of_interest) {
+                const coi = data.center_of_interest;
+                
+                // Update COI sphere
+                coiSphere.position.set(coi[0], coi[1], coi[2]);
+                coiSphere.visible = true;
+
+                // Create and add COI box
+                if (coiBox) {
+                    scene.remove(coiBox);
+                }
+                const boxGeometry = new THREE.BoxGeometry(4, 4, 4);
+                const boxMaterial = new THREE.LineBasicMaterial({ 
+                    color: 0x0000ff,
+                    transparent: true,
+                    opacity: 0.5
+                });
+                const boxWireframe = new THREE.WireframeGeometry(boxGeometry);
+                coiBox = new THREE.LineSegments(boxWireframe, boxMaterial);
+                coiBox.position.set(coi[0], coi[1], coi[2]);
+                scene.add(coiBox);
+            }
         }
 
         function onWindowResize() {
