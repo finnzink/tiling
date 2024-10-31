@@ -3,16 +3,25 @@ import itertools
 from multiprocessing import Pool
 from functools import partial
 
-def _get_k_combos(k_range, dimensions):
-    """ 
-    Returns all possible comparison between two sets of lines for dimension number "dimensions" and max k_range (index range)
-    E.g for 2D with a k range of 1 this is: 
-
-      k_combos = [[-1 -1] [-1  0] [-1  1] [ 0 -1] [ 0  0] [ 0  1] [ 1 -1] [ 1  0] [ 1  1]]
-     
-    Then, when comparing two 2D construction sets, this compares line (-1) of set 1, with line (-1) of set 2, etc...
+def _get_k_combos(k_range, dimensions, center_point=None):
     """
-    return np.array(list(itertools.product(*[ [k for k in range(1-k_range, k_range)] for _d in range(dimensions) ])))
+    Returns all possible comparison between two sets of lines for dimension number "dimensions" and max k_range (index range)
+    If center_point is provided, the k_range will be centered around that point in real space.
+    """
+    if center_point is not None:
+        # We need to convert the real space point to grid space indices
+        # This will be handled by the ConstructionSet's get_intersections_with method
+        # as it has access to the normal vectors and offsets
+        return np.array(list(itertools.product(*[
+            [k for k in range(-k_range, k_range + 1)] 
+            for d in range(dimensions)
+        ])))
+    else:
+        # Original behavior centered around origin
+        return np.array(list(itertools.product(*[
+            [k for k in range(1-k_range, k_range)] 
+            for _d in range(dimensions)
+        ])))
 
 class ConstructionSet:
     """
@@ -27,31 +36,38 @@ class ConstructionSet:
         self.normal = normal
         self.offset = offset
 
-    def get_intersections_with(self, k_range, others):
+    def get_intersections_with(self, k_range, others, center_point=None):
         """
         Calculates all intersections between this set of lines/planes and another.
+        center_point: Point in real space to center the k_range around
         """
         dimensions = len(self.normal)
-        # Pack Cartesian coefficients into matrix.
-        # E.g ax + by + cz = d.     a, b, c for each
-        coef_matrix = np.array([self.normal, *[ o.normal for o in others ]])
+        coef_matrix = np.array([self.normal, *[o.normal for o in others]])
 
-        # Check for singular matrix
         if np.linalg.det(coef_matrix) == 0:
             print("WARNING: Unit vectors form singular matrices.")
             return [], []
 
-        # get inverse of coefficient matrix
         coef_inv = np.linalg.inv(coef_matrix)
-
         k_combos = _get_k_combos(k_range, dimensions)
 
-        # last part (d) of Cartiesian form.
-        # Pack offsets into N dimensional vector, then + [integers] to get specific planes within set
-        base_offsets = np.array([self.offset, *[ o.offset for o in others ]])
+        # Get the base offsets
+        base_offsets = np.array([self.offset, *[o.offset for o in others]])
+        
+        if center_point is not None:
+            # Calculate the plane indices for the center point
+            # For each normal vector (including this one and others), calculate which plane the point lies on
+            center_planes = np.array([
+                np.dot(center_point, self.normal),
+                *[np.dot(center_point, o.normal) for o in others]
+            ])
+            # Round to get the nearest plane indices
+            center_indices = np.floor(center_planes - base_offsets)
+            # Shift k_combos to be centered around these indices
+            k_combos = k_combos + center_indices
 
-        ds = k_combos + base_offsets # remaining part of cartesian form (d)
-        intersections = np.asarray( (coef_inv * np.asmatrix(ds).T).T )
+        ds = k_combos + base_offsets
+        intersections = np.asarray((coef_inv * np.asmatrix(ds).T).T)
 
         return intersections, k_combos
 
@@ -200,11 +216,15 @@ def get_edges_from_indices(indices):
 
     return np.array(edges)
 
-def _get_cells_from_construction_sets(construction_sets, k_range, basis, shape_accuracy, js):
+def _get_cells_from_construction_sets(construction_sets, k_range, basis, shape_accuracy, js, center_point=None):
     """
     Retrieves all intersections between the first construction set in the index list, and the rest.
     """
-    intersections, k_combos = construction_sets[js[0]].get_intersections_with(k_range, [construction_sets[j] for j in js[1:]])
+    intersections, k_combos = construction_sets[js[0]].get_intersections_with(
+        k_range, 
+        [construction_sets[j] for j in js[1:]], 
+        center_point=center_point
+    )
 
     cells = []
     for i, intersection in enumerate(intersections):
@@ -225,7 +245,7 @@ def _get_cells_from_construction_sets(construction_sets, k_range, basis, shape_a
 def construction_sets_from_basis(basis):
     return [ ConstructionSet(e, basis.offsets[i]) for (i, e) in enumerate(basis.vecs) ]
 
-def dualgrid_method(basis, k_range, shape_accuracy=4, single_threaded=False):
+def dualgrid_method(basis, k_range, center_point=None, shape_accuracy=4, single_threaded=False):
     """
     de Bruijn dual grid method.
     Generates and returns cells from basis given in the range given.
@@ -244,11 +264,15 @@ def dualgrid_method(basis, k_range, shape_accuracy=4, single_threaded=False):
     cells = []
     if single_threaded:
         for js in j_combos:
-            cells.append(_get_cells_from_construction_sets(construction_sets, k_range, basis, shape_accuracy, js))
+            cells.append(_get_cells_from_construction_sets(
+                construction_sets, k_range, basis, shape_accuracy, js, center_point
+            ))
     else:
         # Use a `Pool` to distribute work between CPU cores.
         p = Pool()
-        work_func = partial(_get_cells_from_construction_sets, construction_sets, k_range, basis, shape_accuracy)
+        work_func = partial(_get_cells_from_construction_sets, 
+                          construction_sets, k_range, basis, shape_accuracy, 
+                          center_point=center_point)
         cells = p.map(work_func, j_combos)
         p.close()
 

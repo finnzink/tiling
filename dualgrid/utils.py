@@ -571,7 +571,7 @@ def cells_to_dict(cells):
             'vertices': to_native(cell.verts),
             'indices': to_native(cell.indices),
             'intersection': to_native(cell.intersection),
-            'filled': i == 0,
+            'filled': True,
             'face_indices': []
         }
         
