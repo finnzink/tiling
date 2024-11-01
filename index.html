@@ -28,10 +28,9 @@
     </script>
     <script type="module">
         import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
         // Add to the top with other global variables
-        let scene, camera, renderer, controls, raycaster, mouse, jsonData;
+        let scene, camera, renderer, raycaster, mouse, jsonData;
         let hoverSphere;
         let ghostCell = null;
         let coiSphere = null;
@@ -40,6 +39,45 @@
         // Add these variables with other globals
         let isMouseDragging = false;
         let mouseDownTime = 0;
+
+        // Add these variables with other globals
+        let moveState = {
+            forward: false,
+            backward: false,
+            left: false,
+            right: false,
+            up: false,
+            down: false
+        };
+        let moveSpeed = 0.1;
+        let rotationSpeed = 0.002;
+
+        // Add these variables with other globals
+        let pitch = 0; // Store vertical rotation separately
+        let yaw = 0;   // Store horizontal rotation separately
+
+        // Define these functions before init()
+        function onKeyDown(event) {
+            switch (event.code) {
+                case 'KeyW': moveState.forward = true; break;
+                case 'KeyS': moveState.backward = true; break;
+                case 'KeyA': moveState.left = true; break;
+                case 'KeyD': moveState.right = true; break;
+                case 'Space': moveState.up = true; break;
+                case 'ShiftLeft': moveState.down = true; break;
+            }
+        }
+
+        function onKeyUp(event) {
+            switch (event.code) {
+                case 'KeyW': moveState.forward = false; break;
+                case 'KeyS': moveState.backward = false; break;
+                case 'KeyA': moveState.left = false; break;
+                case 'KeyD': moveState.right = false; break;
+                case 'Space': moveState.up = false; break;
+                case 'ShiftLeft': moveState.down = false; break;
+            }
+        }
 
         function init() {
             // Scene setup
@@ -55,9 +93,19 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
-            // Controls setup
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
+            // Add key listeners for WASD and Space/Shift
+            document.addEventListener('keydown', onKeyDown);
+            document.addEventListener('keyup', onKeyUp);
+            
+            // Modified mouse listeners for camera rotation
+            document.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('mousemove', onMouseMove);
+            
+            // Lock pointer on click
+            renderer.domElement.addEventListener('click', () => {
+                renderer.domElement.requestPointerLock();
+            });
 
             // Remove lighting setup
             // const ambientLight = new THREE.AmbientLight(0x404040);
@@ -128,6 +176,21 @@
         }
 
         function onMouseMove(event) {
+            if (document.pointerLockElement === renderer.domElement) {
+                // Update yaw (left/right rotation)
+                yaw -= event.movementX * rotationSpeed;
+                
+                // Update pitch (up/down rotation) with constraints
+                pitch -= event.movementY * rotationSpeed;
+                pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, pitch)); // Clamp between -90 and 90 degrees
+                
+                // Apply rotations properly
+                camera.rotation.set(0, 0, 0); // Reset rotation
+                camera.rotateY(yaw);          // First rotate around Y axis
+                camera.rotateX(pitch);        // Then rotate up/down
+            }
+            
+            // Update mouse position for raycasting
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -316,7 +379,6 @@
             const maxDim = Math.max(size.x, size.y, size.z);
             camera.position.set(center.x + maxDim, center.y + maxDim, center.z + maxDim);
             camera.lookAt(center);
-            controls.target.copy(center);
 
             // Add COI sphere and box if center_of_interest exists in the data
             if (data.center_of_interest) {
@@ -351,7 +413,32 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            controls.update();
+            
+            // Handle movement
+            const direction = new THREE.Vector3();
+            
+            if (moveState.forward) {
+                direction.z -= Math.cos(yaw);
+                direction.x -= Math.sin(yaw);
+            }
+            if (moveState.backward) {
+                direction.z += Math.cos(yaw);
+                direction.x += Math.sin(yaw);
+            }
+            if (moveState.left) {
+                direction.x -= Math.cos(yaw);
+                direction.z += Math.sin(yaw);
+            }
+            if (moveState.right) {
+                direction.x += Math.cos(yaw);
+                direction.z -= Math.sin(yaw);
+            }
+            if (moveState.up) direction.y += 1;
+            if (moveState.down) direction.y -= 1;
+            
+            direction.normalize();
+            camera.position.addScaledVector(direction, moveSpeed);
+            
             renderer.render(scene, camera);
         }
 
