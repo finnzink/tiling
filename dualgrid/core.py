@@ -252,6 +252,9 @@ def dualgrid_method(basis, k_range, center_point=None, shape_accuracy=4, single_
     Shape accuracy is the number of decimal places used to classify cell shapes
     Returns: cells, possible cell shapes
     """
+    # Scale center point by 1/2 if provided
+    if center_point is not None:
+        center_point = np.array(center_point) / 2
     # Get each set of parallel planes
     construction_sets = construction_sets_from_basis(basis)
 
