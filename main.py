@@ -24,7 +24,7 @@ def main():
     
     # print("Number of cells filtered:", len(cells))
     
-    dg.utils.export_cells_to_json(cells, "cells_out.json")
+    dg.utils.export_cells_to_json(cells, "cells_out.json", center_point=center_point)
     print("DONE :)")
 
 

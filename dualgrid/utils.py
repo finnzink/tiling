@@ -504,7 +504,7 @@ def to_native(obj):
         return {key: to_native(value) for key, value in obj.items()}
     return obj
 
-def cells_to_dict(cells):
+def cells_to_dict(cells, center_point=None):
     """
     Converts a list of Cell objects to a dictionary format suitable for JSON serialization.
     Includes cells (indexed by UUID), triangles (indexed by triangle center position), and COI.
@@ -523,7 +523,7 @@ def cells_to_dict(cells):
     result = {
         'cells': {},    # Will be indexed by UUID
         'triangles': {},  # Will be indexed by triangle center position string
-        'center_of_interest': to_native(get_centre_of_interest(cells))  # Add COI to output
+        'center_of_interest': center_point   # Add COI to output
     }
     
     def calculate_face_normal(vertices):
@@ -622,7 +622,7 @@ def cells_to_dict(cells):
 
     return to_native(result)
 
-def export_cells_to_json(cells, filepath):
+def export_cells_to_json(cells, filepath, center_point=None):
     """
     Saves the cells to a JSON file.
     
@@ -630,7 +630,7 @@ def export_cells_to_json(cells, filepath):
         cells: List of Cell objects to export
         filepath: Path to save the JSON file
     """
-    data = cells_to_dict(cells)
+    data = cells_to_dict(cells, center_point)
     
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
