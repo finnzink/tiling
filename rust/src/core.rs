@@ -346,6 +346,12 @@ fn get_cells_from_construction_sets(
                 .map(|indices| basis.realspace(indices))
                 .collect();
 
+            // Add print statements for vertices
+            println!("[RS] Cell vertices:");
+            for (i, vertex) in vertices_set.iter().enumerate() {
+                println!("[RS]   Vertex {}: {:?}", i, vertex);
+            }
+
             Cell::new(vertices_set, indices_set, intersection.to_vec())
         })
         .collect()
