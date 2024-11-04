@@ -30,6 +30,8 @@ impl ConstructionSet {
         &self,
         k_range: i32,
         others: &[ConstructionSet],
+        basis: &Basis,
+        js: &[usize],
         center_point: Option<&Vec<f64>>
     ) -> (Vec<Vec<f64>>, Vec<Vec<i32>>) {
         println!("[RS] Computing intersections with k_range: {}", k_range);
@@ -44,7 +46,7 @@ impl ConstructionSet {
 
         let matrix_size = coef_matrix.len();
         
-        // Create coefficient matrix
+        // Create coefficient matrix with explicit column-major layout
         let coef_matrix = na::DMatrix::from_vec(
             matrix_size,
             matrix_size,
@@ -66,8 +68,10 @@ impl ConstructionSet {
             .collect::<Vec<_>>();
 
         let mut ds = Vec::new();
+        let mut final_k_combos = Vec::new();
         for k_combo in &k_combos {
             let mut current_ds = Vec::new();
+            let mut final_k_combo = Vec::new();
             
             if let Some(cp) = center_point {
                 // Calculate center planes
@@ -86,38 +90,58 @@ impl ConstructionSet {
                     .zip(center_indices.iter())
                     .zip(base_offsets.iter()) 
                 {
-                    current_ds.push(offset + (k as f64 + center_idx));
+                    let adjusted_k = k as f64 + center_idx;
+                    current_ds.push(offset + adjusted_k);
+                    final_k_combo.push((offset + adjusted_k).ceil() as i32);
                 }
             } else {
                 // Original logic for when no center point is provided
-                current_ds.push(self.offset);
-                for (other, &k) in others.iter().zip(k_combo.iter()) {
-                    current_ds.push(other.offset + k as f64);
+                for (k, &offset) in k_combo.iter().zip(base_offsets.iter()) {
+                    let value = offset + *k as f64;
+                    current_ds.push(value);
+                    final_k_combo.push(value.ceil() as i32);
                 }
             }
             
             ds.extend(current_ds);
+            final_k_combos.push(final_k_combo);
         }
 
         println!("[RS] ds values: {:?}", ds);
         println!("[RS] First few ds values: {:?}", &ds[..std::cmp::min(ds.len(), 3)]);
         println!("[RS] ds_matrix shape: {}x{}", ds.len() / matrix_size, matrix_size);
 
-        let ds_matrix = na::DMatrix::from_vec(ds.len() / matrix_size, matrix_size, ds);
-        let intersections_matrix = &coef_inv * ds_matrix.transpose();
+        // Create ds as a column vector with explicit layout
+        let ds_matrix = na::DMatrix::from_vec(matrix_size, 1, ds);
         
-        // Convert matrix to Vec<Vec<f64>>
-        let intersections: Vec<Vec<f64>> = (0..intersections_matrix.ncols())
+        println!("[RS] ds_matrix:\n{:?}", ds_matrix);
+        println!("[RS] coef_inv:\n{:?}", coef_inv);
+        
+        // Try transposing coef_inv before multiplication
+        let result = &coef_inv.transpose() * &ds_matrix;
+        println!("[RS] Result before transpose:\n{:?}", result);
+        
+        let intersections: Vec<Vec<f64>> = (0..result.ncols())
             .map(|col| {
-                (0..intersections_matrix.nrows())
-                    .map(|row| intersections_matrix[(row, col)])
+                (0..result.nrows())
+                    .map(|row| result[(row, col)])
                     .collect()
             })
             .collect();
 
         println!("[RS] First intersection: {:?}", intersections.first().unwrap());
         
-        (intersections, k_combos)
+        // For each intersection, calculate its gridspace indices
+        let final_k_combos: Vec<Vec<i32>> = intersections.iter()
+            .map(|intersection| {
+                // Use gridspace to get the indices
+                let indices = basis.gridspace(intersection);
+                // Only take the indices corresponding to js
+                js.iter().map(|&j| indices[j]).collect()
+            })
+            .collect();
+
+        (intersections, final_k_combos)
     }
 }
 
@@ -146,16 +170,19 @@ impl Basis {
 
     pub fn gridspace(&self, r: &[f64]) -> Vec<i32> {
         let mut out = vec![0; self.vecs.len()];
-        for (j, e) in self.vecs.iter().enumerate() {
+        for j in 0..self.vecs.len() {
+            let e = &self.vecs[j];
             let dot = dot_product(r, e);
-            // Add debug prints
             println!("[RS] Vec {}: {:?}", j, e);
             println!("[RS] Dot product {}: {}", j, dot);
             println!("[RS] Offset {}: {}", j, self.offsets[j]);
-            println!("[RS] Ceil value {}: {}", j, (dot - self.offsets[j]).ceil());
             
-            out[j] = (dot - self.offsets[j]).ceil() as i32;
+            let ceil_value = (dot - self.offsets[j]).ceil() as i32;
+            println!("[RS] Ceil value {}: {}", j, ceil_value);
+            
+            out[j] = ceil_value;  // Store the value directly
         }
+        println!("[RS] Final gridspace indices: {:?}", out);
         out
     }
 
@@ -234,44 +261,50 @@ fn get_neighbours(
     ks: &[i32],
     basis: &Basis
 ) -> Vec<Vec<i32>> {
-    // Generate all possible combinations of 0s and 1s for the given dimensions
-    let directions: Vec<Vec<i32>> = (0..basis.dimensions)
-        .map(|_| vec![0, 1])
-        .multi_cartesian_product()
-        .collect();
-
     let mut indices = basis.gridspace(intersection);
-
+    println!("[RS] Gridspace returned indices: {:?}", indices);
+    
     // Load known indices
     for (index, &j) in js.iter().enumerate() {
         indices[j] = ks[index];
     }
-
-    // Generate deltas (Kronecker delta function implementation)
-    let deltas: Vec<Vec<i32>> = (0..basis.dimensions)
-        .map(|i| {
-            (0..basis.vecs.len())
-                .map(|j| if js[i] == j { 1 } else { 0 })
-                .collect()
+    println!("[RS] After loading known indices: {:?}", indices);
+    println!("[RS] Initial indices: {:?}", indices);
+    
+    // Generate directions - all possible combinations of 0s and 1s
+    let directions: Vec<Vec<i32>> = (0..js.len())
+        .map(|_| vec![0, 1])
+        .multi_cartesian_product()
+        .collect();
+    
+    // Generate deltas
+    let deltas: Vec<Vec<i32>> = js.iter().enumerate()
+        .map(|(i, &j)| {
+            let mut delta = vec![0; basis.vecs.len()];
+            delta[j] = 1;
+            delta
         })
         .collect();
-
-    println!("[RS] Initial indices: {:?}", indices);
+    
     println!("[RS] Deltas: {:?}", deltas);
-    println!("[RS] First neighbour: {:?}", directions[0]);
-
-    // Generate neighbours using equation 4.5 from de Bruijn's paper
-    directions.iter()
-        .map(|direction| {
-            let mut neighbour = indices.clone();
-            for (i, &e) in direction.iter().enumerate() {
-                for (j, delta) in deltas[i].iter().enumerate() {
-                    neighbour[j] += e * delta;
+    
+    // Generate neighbours
+    let mut neighbours = Vec::new();
+    for direction in directions {
+        let mut neighbour = indices.clone();
+        for (i, &d) in direction.iter().enumerate() {
+            if d == 1 {
+                // Add the corresponding delta
+                for (j, &delta) in deltas[i].iter().enumerate() {
+                    neighbour[j] += delta;
                 }
             }
-            neighbour
-        })
-        .collect()
+        }
+        println!("[RS] Generated neighbour: {:?}", neighbour);
+        neighbours.push(neighbour);
+    }
+    
+    neighbours
 }
 
 fn get_cells_from_construction_sets(
@@ -289,7 +322,7 @@ fn get_cells_from_construction_sets(
         .collect();
 
     let (intersections, k_combos) = construction_sets[js[0]]
-        .get_intersections_with(k_range, &others, center_point);
+        .get_intersections_with(k_range, &others, basis, js, center_point);
     
     println!("[RS] Found {} intersections for js {:?}", intersections.len(), js);
 

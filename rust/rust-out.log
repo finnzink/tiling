@@ -1,0 +1,1678 @@
+Rust icosahedral basis:
+v0: [0.894427, 0.000000, 0.447214]
+v1: [0.276393, 0.850651, 0.447214]
+v2: [-0.723607, 0.525731, 0.447214]
+v3: [-0.723607, -0.525731, 0.447214]
+v4: [0.276393, -0.850651, 0.447214]
+v5: [0.000000, 0.000000, 1.000000]
+Offsets: [0.27, 0.37, 0.47, 0.57, 0.67, 0.77]
+Basis offsets: [0.27, 0.37, 0.47, 0.57, 0.67, 0.77]
+[RS] Starting dualgrid_method
+[RS] Adjusted center_point: [5.0, -5.0, 5.0]
+[RS] Created 6 construction sets
+[RS] Generated 20 j_combos
+[RS] Running single-threaded
+[RS] Getting cells for js: [0, 1, 2]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, 0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.30901699437494734, 0.5000000000000002, -0.8090169943749476, -0.9510565162951538, 1.5388417685876272, -0.5877852522924731, 1.6180339887498951, -1.0000000000000004, 1.6180339887498951], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -1.63, -4.53]
+[RS] First few ds values: [6.27, -1.63, -4.53]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -1.63, -4.53], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.30901699437494734, 0.5000000000000002, -0.8090169943749476, -0.9510565162951538, 1.5388417685876272, -0.5877852522924731, 1.6180339887498951, -1.0000000000000004, 1.6180339887498951], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.787383539249433, -5.808769247083543, 4.4453791404248175], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.787383539249433, -5.808769247083543, 4.4453791404248175]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.2700000000000005
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000008
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.5777014326253047
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.252468511124171
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.4453791404248175
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -5, 2, 8, 4]
+[RS] Found 1 intersections for js [0, 1, 2]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.2700000000000005
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000008
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.5777014326253047
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.252468511124171
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.4453791404248175
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -5, 2, 8, 4]
+[RS] Gridspace returned indices: [6, -2, -5, 2, 8, 4]
+[RS] After loading known indices: [6, -2, -5, 2, 8, 4]
+[RS] Initial indices: [6, -2, -5, 2, 8, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0]]
+[RS] Generated neighbour: [6, -2, -5, 2, 8, 4]
+[RS] Generated neighbour: [6, -2, -4, 2, 8, 4]
+[RS] Generated neighbour: [6, -1, -5, 2, 8, 4]
+[RS] Generated neighbour: [6, -1, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, -2, -5, 2, 8, 4]
+[RS] Generated neighbour: [7, -2, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, -1, -5, 2, 8, 4]
+[RS] Generated neighbour: [7, -1, -4, 2, 8, 4]
+[RS] Found 1 cells for combo [0, 1, 2]
+[RS] Getting cells for js: [0, 1, 3]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, 0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.8090169943749475, -0.3090169943749474, -0.5, -0.5877852522924732, 0.9510565162951536, -0.3632712640026804, 0.6180339887498949, 0.6180339887498948, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -1.63, 0.57]
+[RS] First few ds values: [6.27, -1.63, 0.57]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -1.63, 0.57], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.8090169943749475, -0.3090169943749474, -0.5, -0.5877852522924732, 0.9510565162951536, -0.3632712640026804, 0.6180339887498949, 0.6180339887498948, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.291234255562085, -5.442700273916435, 3.437677707799512], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.291234255562085, -5.442700273916435, 3.437677707799512]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.1527937358744005
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999994
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.629674775249768
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.437677707799512
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
+[RS] Found 1 intersections for js [0, 1, 3]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.1527937358744005
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999994
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.629674775249768
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.437677707799512
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
+[RS] Gridspace returned indices: [6, -2, -5, 0, 7, 3]
+[RS] After loading known indices: [6, -2, -5, 0, 7, 3]
+[RS] Initial indices: [6, -2, -5, 0, 7, 3]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] Generated neighbour: [6, -2, -5, 0, 7, 3]
+[RS] Generated neighbour: [6, -2, -5, 1, 7, 3]
+[RS] Generated neighbour: [6, -1, -5, 0, 7, 3]
+[RS] Generated neighbour: [6, -1, -5, 1, 7, 3]
+[RS] Generated neighbour: [7, -2, -5, 0, 7, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 7, 3]
+[RS] Generated neighbour: [7, -1, -5, 0, 7, 3]
+[RS] Generated neighbour: [7, -1, -5, 1, 7, 3]
+[RS] Found 1 cells for combo [0, 1, 3]
+[RS] Getting cells for js: [0, 1, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, 0.27639320225002106, 0.8506508083520399, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.618033988749895, -0.8090169943749476, -0.8090169943749475, -2.0659014979497046e-16, 0.5877852522924734, -0.5877852522924731, -1.0, 1.6180339887498951, 1.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -1.63, 7.67]
+[RS] First few ds values: [6.27, -1.63, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -1.63, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.618033988749895, -0.8090169943749476, -0.8090169943749475, -2.0659014979497046e-16, 0.5877852522924734, -0.5877852522924731, -1.0, 1.6180339887498951, 1.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.258610463437158, -5.466402846320002, 3.5029252920493654], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.258610463437158, -5.466402846320002, 3.5029252920493654]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000012
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.11246851112417
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.6352475842498535
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.670000000000002
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.5029252920493654
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 1, 8, 3]
+[RS] Found 1 intersections for js [0, 1, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000012
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.11246851112417
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.6352475842498535
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.670000000000002
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.5029252920493654
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 1, 8, 3]
+[RS] Gridspace returned indices: [6, -2, -5, 1, 8, 3]
+[RS] After loading known indices: [6, -2, -5, 1, 8, 3]
+[RS] Initial indices: [6, -2, -5, 1, 8, 3]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [6, -2, -5, 1, 8, 3]
+[RS] Generated neighbour: [6, -2, -5, 1, 9, 3]
+[RS] Generated neighbour: [6, -1, -5, 1, 8, 3]
+[RS] Generated neighbour: [6, -1, -5, 1, 9, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 8, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 9, 3]
+[RS] Generated neighbour: [7, -1, -5, 1, 8, 3]
+[RS] Generated neighbour: [7, -1, -5, 1, 9, 3]
+[RS] Found 1 cells for combo [0, 1, 4]
+[RS] Getting cells for js: [0, 1, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, 0.27639320225002106, 0.8506508083520399, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.118033988749895, -0.0, -0.5, -0.36327126400268056, 1.1755705045849465, -0.3632712640026804, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -1.63, 4.77]
+[RS] First few ds values: [6.27, -1.63, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -1.63, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.118033988749895, -0.0, -0.5, -0.36327126400268056, 1.1755705045849465, -0.3632712640026804, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.625073109461841, -5.926694677063055, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.625073109461841, -5.926694677063055, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6299999999999994
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.329373275325331
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.9023222922004872
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.45309523579884
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 2, 8, 4]
+[RS] Found 1 intersections for js [0, 1, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6299999999999994
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.329373275325331
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.9023222922004872
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.45309523579884
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 2, 8, 4]
+[RS] Gridspace returned indices: [6, -1, -4, 2, 8, 4]
+[RS] After loading known indices: [6, -1, -4, 2, 8, 4]
+[RS] Initial indices: [6, -1, -4, 2, 8, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [6, -1, -4, 2, 8, 4]
+[RS] Generated neighbour: [6, -1, -4, 2, 8, 5]
+[RS] Generated neighbour: [6, 0, -4, 2, 8, 4]
+[RS] Generated neighbour: [6, 0, -4, 2, 8, 5]
+[RS] Generated neighbour: [7, -1, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, -1, -4, 2, 8, 5]
+[RS] Generated neighbour: [7, 0, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 2, 8, 5]
+[RS] Found 1 cells for combo [0, 1, 5]
+[RS] Getting cells for js: [0, 2, 3]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.6180339887498949, -0.3090169943749474, -0.3090169943749475, -7.295984817955648e-17, 0.9510565162951536, -0.9510565162951536, 1.0, 0.6180339887498948, 0.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -4.53, 0.57]
+[RS] First few ds values: [6.27, -4.53, 0.57]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -4.53, 0.57], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.6180339887498949, -0.3090169943749474, -0.3090169943749475, -7.295984817955648e-17, 0.9510565162951536, -0.9510565162951536, 1.0, 0.6180339887498948, 0.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.0987804071866325, -4.850388233105285, 3.8225854045504164], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.0987804071866325, -4.850388233105285, 3.8225854045504164]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.007206264125601
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.244767078498866
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.8225854045504164
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -5, 1, 7, 4]
+[RS] Found 1 intersections for js [0, 2, 3]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.007206264125601
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.244767078498866
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.8225854045504164
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -5, 1, 7, 4]
+[RS] Gridspace returned indices: [6, -1, -5, 1, 7, 4]
+[RS] After loading known indices: [6, -1, -5, 1, 7, 4]
+[RS] Initial indices: [6, -1, -5, 1, 7, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] Generated neighbour: [6, -1, -5, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -5, 2, 7, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -4, 2, 7, 4]
+[RS] Generated neighbour: [7, -1, -5, 1, 7, 4]
+[RS] Generated neighbour: [7, -1, -5, 2, 7, 4]
+[RS] Generated neighbour: [7, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [7, -1, -4, 2, 7, 4]
+[RS] Found 1 cells for combo [0, 2, 3]
+[RS] Getting cells for js: [0, 2, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.8090169943749473, -0.49999999999999994, -0.30901699437494745, 0.5877852522924729, 0.36327126400268045, -0.9510565162951534, 0.6180339887498948, 0.9999999999999999, 0.6180339887498949], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -4.53, 7.67]
+[RS] First few ds values: [6.27, -4.53, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -4.53, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.8090169943749473, -0.49999999999999994, -0.30901699437494745, 0.5877852522924729, 0.36327126400268045, -0.9510565162951534, 0.6180339887498948, 0.9999999999999999, 0.6180339887498949], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.967376207875072, -5.254808774042164, 4.085393803173535], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.967376207875072, -5.254808774042164, 4.085393803173535]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.269999999999998
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.2700146627487177
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.5299999999999985
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.9952329215011371
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.085393803173535
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
+[RS] Found 1 intersections for js [0, 2, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.269999999999998
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.2700146627487177
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.5299999999999985
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.9952329215011371
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.085393803173535
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
+[RS] Gridspace returned indices: [6, -1, -4, 1, 7, 4]
+[RS] After loading known indices: [6, -1, -4, 1, 7, 4]
+[RS] Initial indices: [6, -1, -4, 1, 7, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 8, 4]
+[RS] Generated neighbour: [6, -1, -3, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -3, 1, 8, 4]
+[RS] Generated neighbour: [7, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [7, -1, -4, 1, 8, 4]
+[RS] Generated neighbour: [7, -1, -3, 1, 7, 4]
+[RS] Generated neighbour: [7, -1, -3, 1, 8, 4]
+[RS] Found 1 cells for combo [0, 2, 4]
+[RS] Getting cells for js: [0, 2, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.118033988749895, -0.0, -0.5, 1.5388417685876261, 1.9021130325903068, -1.5388417685876263, -0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, -4.53, 4.77]
+[RS] First few ds values: [6.27, -4.53, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, -4.53, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.118033988749895, -0.0, -0.5, 1.5388417685876261, 1.9021130325903068, -1.5388417685876263, -0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.625073109461841, -6.308309384752654, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.625073109461841, -6.308309384752654, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.954620859575185
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 2.1029490168751583
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.777716095374025
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 9
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -5, 2, 9, 4]
+[RS] Found 1 intersections for js [0, 2, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.954620859575185
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000001
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 2.1029490168751583
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.777716095374025
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 9
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -5, 2, 9, 4]
+[RS] Gridspace returned indices: [6, -2, -5, 2, 9, 4]
+[RS] After loading known indices: [6, -2, -5, 2, 9, 4]
+[RS] Initial indices: [6, -2, -5, 2, 9, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [6, -2, -5, 2, 9, 4]
+[RS] Generated neighbour: [6, -2, -5, 2, 9, 5]
+[RS] Generated neighbour: [6, -2, -4, 2, 9, 4]
+[RS] Generated neighbour: [6, -2, -4, 2, 9, 5]
+[RS] Generated neighbour: [7, -2, -5, 2, 9, 4]
+[RS] Generated neighbour: [7, -2, -5, 2, 9, 5]
+[RS] Generated neighbour: [7, -2, -4, 2, 9, 4]
+[RS] Generated neighbour: [7, -2, -4, 2, 9, 5]
+[RS] Found 1 cells for combo [0, 2, 5]
+[RS] Getting cells for js: [0, 3, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.3090169943749475, -0.8090169943749475, 0.4999999999999999, 0.9510565162951534, 0.5877852522924731, -1.5388417685876266, 1.6180339887498945, 1.618033988749895, -0.9999999999999998], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, 0.57, 7.67]
+[RS] First few ds values: [6.27, 0.57, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, 0.57, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.3090169943749475, -0.8090169943749475, 0.4999999999999999, 0.9510565162951534, 0.5877852522924731, -1.5388417685876266, 1.6180339887498945, 1.618033988749895, -0.9999999999999998], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.3113968679372, -5.504754414089775, 3.3973524830492785], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.3113968679372, -5.504754414089775, 3.3973524830492785]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.269999999999998
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6952475842498547
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.218041320124255
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999996
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.3973524830492785
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
+[RS] Found 1 intersections for js [0, 3, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.269999999999998
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6952475842498547
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.218041320124255
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999996
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.3973524830492785
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
+[RS] Gridspace returned indices: [6, -2, -5, 0, 7, 3]
+[RS] After loading known indices: [6, -2, -5, 0, 7, 3]
+[RS] Initial indices: [6, -2, -5, 0, 7, 3]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [6, -2, -5, 0, 7, 3]
+[RS] Generated neighbour: [6, -2, -5, 0, 8, 3]
+[RS] Generated neighbour: [6, -2, -5, 1, 7, 3]
+[RS] Generated neighbour: [6, -2, -5, 1, 8, 3]
+[RS] Generated neighbour: [7, -2, -5, 0, 7, 3]
+[RS] Generated neighbour: [7, -2, -5, 0, 8, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 7, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 8, 3]
+[RS] Found 1 cells for combo [0, 3, 4]
+[RS] Getting cells for js: [0, 3, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.118033988749895, 0.0, -0.5, -1.538841768587627, -1.9021130325903075, 1.538841768587627, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, 0.57, 4.77]
+[RS] First few ds values: [6.27, 0.57, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, 0.57, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.118033988749895, 0.0, -0.5, -1.538841768587627, -1.9021130325903075, 1.538841768587627, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.625073109461841, -3.3924670814579168, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.625073109461841, -3.3924670814579168, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: 0.5257427527495575
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -2.997050983124843
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -3
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 6.297352483049281
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 6
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, 1, -3, 1, 6, 4]
+[RS] Found 1 intersections for js [0, 3, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: 0.5257427527495575
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -2.997050983124843
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -3
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 6.297352483049281
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 6
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, 1, -3, 1, 6, 4]
+[RS] Gridspace returned indices: [6, 1, -3, 1, 6, 4]
+[RS] After loading known indices: [6, 1, -3, 1, 6, 4]
+[RS] Initial indices: [6, 1, -3, 1, 6, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [6, 1, -3, 1, 6, 4]
+[RS] Generated neighbour: [6, 1, -3, 1, 6, 5]
+[RS] Generated neighbour: [6, 1, -3, 2, 6, 4]
+[RS] Generated neighbour: [6, 1, -3, 2, 6, 5]
+[RS] Generated neighbour: [7, 1, -3, 1, 6, 4]
+[RS] Generated neighbour: [7, 1, -3, 1, 6, 5]
+[RS] Generated neighbour: [7, 1, -3, 2, 6, 4]
+[RS] Generated neighbour: [7, 1, -3, 2, 6, 5]
+[RS] Found 1 cells for combo [0, 3, 5]
+[RS] Getting cells for js: [0, 4, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.8944271909999159, 0.0, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.118033988749895, 0.0, -0.5, 0.3632712640026802, -1.1755705045849463, 0.3632712640026805, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [6.27, 7.67, 4.77]
+[RS] First few ds values: [6.27, 7.67, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [6.27, 7.67, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.118033988749895, 0.0, -0.5, 0.3632712640026802, -1.1755705045849463, 0.3632712640026805, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.625073109461841, -5.006111015576947, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.625073109461841, -5.006111015576947, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.8469047642011609
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -3.845393803173535
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.4183428200486916
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
+[RS] Found 1 intersections for js [0, 4, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.27
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.8469047642011609
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -3.845393803173535
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.4183428200486916
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
+[RS] Gridspace returned indices: [6, -1, -4, 1, 7, 4]
+[RS] After loading known indices: [6, -1, -4, 1, 7, 4]
+[RS] Initial indices: [6, -1, -4, 1, 7, 4]
+[RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 7, 5]
+[RS] Generated neighbour: [6, -1, -4, 1, 8, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 8, 5]
+[RS] Generated neighbour: [7, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [7, -1, -4, 1, 7, 5]
+[RS] Generated neighbour: [7, -1, -4, 1, 8, 4]
+[RS] Generated neighbour: [7, -1, -4, 1, 8, 5]
+[RS] Found 1 cells for combo [0, 4, 5]
+[RS] Getting cells for js: [1, 2, 3]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.0, -1.3090169943749472, 0.30901699437494723, -1.1805151416855452e-16, 0.9510565162951536, -0.9510565162951534, 1.6180339887498945, -0.9999999999999999, 1.6180339887498945], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, -4.53, 0.57]
+[RS] First few ds values: [-1.63, -4.53, 0.57]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, -4.53, 0.57], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.0, -1.3090169943749472, 0.30901699437494723, -1.1805151416855452e-16, 0.9510565162951536, -0.9510565162951534, 1.6180339887498945, -0.9999999999999999, 1.6180339887498945], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.475986671312231, -4.850388233105284, 2.814883971925111], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.475986671312231, -4.850388233105284, 2.814883971925111]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.262298567374694
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 5
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.630000000000001
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.53
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000001
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 6.621973342624463
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 6
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 2.814883971925111
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [5, -2, -5, 1, 6, 3]
+[RS] Found 1 intersections for js [1, 2, 3]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.262298567374694
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 5
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.630000000000001
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.53
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000001
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 6.621973342624463
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 6
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 2.814883971925111
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [5, -2, -5, 1, 6, 3]
+[RS] Gridspace returned indices: [5, -2, -5, 1, 6, 3]
+[RS] After loading known indices: [5, -2, -5, 1, 6, 3]
+[RS] Initial indices: [5, -2, -5, 1, 6, 3]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] Generated neighbour: [5, -2, -5, 1, 6, 3]
+[RS] Generated neighbour: [5, -2, -5, 2, 6, 3]
+[RS] Generated neighbour: [5, -2, -4, 1, 6, 3]
+[RS] Generated neighbour: [5, -2, -4, 2, 6, 3]
+[RS] Generated neighbour: [5, -1, -5, 1, 6, 3]
+[RS] Generated neighbour: [5, -1, -5, 2, 6, 3]
+[RS] Generated neighbour: [5, -1, -4, 1, 6, 3]
+[RS] Generated neighbour: [5, -1, -4, 2, 6, 3]
+[RS] Found 1 cells for combo [1, 2, 3]
+[RS] Getting cells for js: [1, 2, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.8090169943749477, -1.0, 0.1909830056250525, 0.587785252292473, 1.2767973431422385e-16, -0.5877852522924731, 0.6180339887498949, 0.6180339887498948, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, -4.53, 7.67]
+[RS] First few ds values: [-1.63, -4.53, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, -4.53, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.8090169943749477, -1.0, 0.1909830056250525, 0.587785252292473, 1.2767973431422385e-16, -0.5877852522924731, 0.6180339887498949, 0.6180339887498948, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.676141952312988, -5.46640284632, 3.862910629300648], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.676141952312988, -5.46640284632, 3.862910629300648]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.910014662748716
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.2177160953740227
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.862910629300648
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -4, 1, 7, 4]
+[RS] Found 1 intersections for js [1, 2, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.910014662748716
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 6
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.2177160953740227
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.862910629300648
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [6, -2, -4, 1, 7, 4]
+[RS] Gridspace returned indices: [6, -2, -4, 1, 7, 4]
+[RS] After loading known indices: [6, -2, -4, 1, 7, 4]
+[RS] Initial indices: [6, -2, -4, 1, 7, 4]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [6, -2, -4, 1, 7, 4]
+[RS] Generated neighbour: [6, -2, -4, 1, 8, 4]
+[RS] Generated neighbour: [6, -2, -3, 1, 7, 4]
+[RS] Generated neighbour: [6, -2, -3, 1, 8, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -4, 1, 8, 4]
+[RS] Generated neighbour: [6, -1, -3, 1, 7, 4]
+[RS] Generated neighbour: [6, -1, -3, 1, 8, 4]
+[RS] Found 1 cells for combo [1, 2, 4]
+[RS] Getting cells for js: [1, 2, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499788, 0.5257311121191337, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.6909830056250528, -1.118033988749895, 0.1909830056250525, 0.9510565162951535, 0.36327126400268056, -0.5877852522924731, -0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, -4.53, 4.77]
+[RS] First few ds values: [-1.63, -4.53, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, -4.53, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.6909830056250528, -1.118033988749895, 0.1909830056250525, 0.9510565162951535, 0.36327126400268056, -0.5877852522924731, -0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [4.849380606699689, -5.999576600928339, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [4.849380606699689, -5.999576600928339, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.47062672467467
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.778328157299974
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.577089370699351
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, -2, -4, 2, 8, 4]
+[RS] Found 1 intersections for js [1, 2, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.47062672467467
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.63
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 1.778328157299974
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 2
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 8.577089370699351
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, -2, -4, 2, 8, 4]
+[RS] Gridspace returned indices: [7, -2, -4, 2, 8, 4]
+[RS] After loading known indices: [7, -2, -4, 2, 8, 4]
+[RS] Initial indices: [7, -2, -4, 2, 8, 4]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [7, -2, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, -2, -4, 2, 8, 5]
+[RS] Generated neighbour: [7, -2, -3, 2, 8, 4]
+[RS] Generated neighbour: [7, -2, -3, 2, 8, 5]
+[RS] Generated neighbour: [7, -1, -4, 2, 8, 4]
+[RS] Generated neighbour: [7, -1, -4, 2, 8, 5]
+[RS] Generated neighbour: [7, -1, -3, 2, 8, 4]
+[RS] Generated neighbour: [7, -1, -3, 2, 8, 5]
+[RS] Found 1 cells for combo [1, 2, 5]
+[RS] Getting cells for js: [1, 3, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.1909830056250527, -1.0000000000000002, 0.8090169943749476, 0.5877852522924732, 1.2767973431422387e-16, -0.5877852522924734, 1.0000000000000002, 0.6180339887498949, 0.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, 0.57, 7.67]
+[RS] First few ds values: [-1.63, 0.57, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, 0.57, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.1909830056250527, -1.0000000000000002, 0.8090169943749476, 0.5877852522924732, 1.2767973431422387e-16, -0.5877852522924734, 1.0000000000000002, 0.6180339887498949, 0.618033988749895], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.323858047687011, -5.466402846320002, 3.4626000672991344], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.323858047687011, -5.466402846320002, 3.4626000672991344]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.3103252247502315
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000006
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.177716095374023
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.570000000000001
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.670000000000001
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.4626000672991344
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [7, -2, -5, 1, 8, 3]
+[RS] Found 1 intersections for js [1, 3, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.3103252247502315
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000006
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -5.177716095374023
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.570000000000001
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.670000000000001
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 3.4626000672991344
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 3
+[RS] Final gridspace indices: [7, -2, -5, 1, 8, 3]
+[RS] Gridspace returned indices: [7, -2, -5, 1, 8, 3]
+[RS] After loading known indices: [7, -2, -5, 1, 8, 3]
+[RS] Initial indices: [7, -2, -5, 1, 8, 3]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [7, -2, -5, 1, 8, 3]
+[RS] Generated neighbour: [7, -2, -5, 1, 9, 3]
+[RS] Generated neighbour: [7, -2, -5, 2, 8, 3]
+[RS] Generated neighbour: [7, -2, -5, 2, 9, 3]
+[RS] Generated neighbour: [7, -1, -5, 1, 8, 3]
+[RS] Generated neighbour: [7, -1, -5, 1, 9, 3]
+[RS] Generated neighbour: [7, -1, -5, 2, 8, 3]
+[RS] Generated neighbour: [7, -1, -5, 2, 9, 3]
+[RS] Found 1 cells for combo [1, 3, 4]
+[RS] Getting cells for js: [1, 3, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [-1.1180339887498947, -1.8090169943749475, 1.3090169943749475, 1.5388417685876268, 0.5877852522924732, -0.9510565162951538, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, 0.57, 4.77]
+[RS] First few ds values: [-1.63, 0.57, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, 0.57, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [-1.1180339887498947, -1.8090169943749475, 1.3090169943749475, 1.5388417685876268, 0.5877852522924732, -0.9510565162951538, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [7.035266778037107, -6.709814071719005, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [7.035266778037107, -6.709814071719005, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 8.425742752749557
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 9
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000003
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -6.485116028074888
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -6
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 9.785417527999325
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 10
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [9, -2, -6, 1, 10, 4]
+[RS] Found 1 intersections for js [1, 3, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 8.425742752749557
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 9
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.6300000000000003
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -2
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -6.485116028074888
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -6
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5700000000000003
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 1
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 9.785417527999325
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 10
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [9, -2, -6, 1, 10, 4]
+[RS] Gridspace returned indices: [9, -2, -6, 1, 10, 4]
+[RS] After loading known indices: [9, -2, -6, 1, 10, 4]
+[RS] Initial indices: [9, -2, -6, 1, 10, 4]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [9, -2, -6, 1, 10, 4]
+[RS] Generated neighbour: [9, -2, -6, 1, 10, 5]
+[RS] Generated neighbour: [9, -2, -6, 2, 10, 4]
+[RS] Generated neighbour: [9, -2, -6, 2, 10, 5]
+[RS] Generated neighbour: [9, -1, -6, 1, 10, 4]
+[RS] Generated neighbour: [9, -1, -6, 1, 10, 5]
+[RS] Generated neighbour: [9, -1, -6, 2, 10, 4]
+[RS] Generated neighbour: [9, -1, -6, 2, 10, 5]
+[RS] Found 1 cells for combo [1, 3, 5]
+[RS] Getting cells for js: [1, 4, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [1.809016994374948, 1.8090169943749477, -1.618033988749895, 0.5877852522924728, -0.5877852522924734, 2.0659014979497046e-16, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-1.63, 7.67, 4.77]
+[RS] First few ds values: [-1.63, 7.67, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-1.63, 7.67, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [1.809016994374948, 1.8090169943749477, -1.618033988749895, 0.5877852522924728, -0.5877852522924734, 2.0659014979497046e-16, -0.0, -0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [3.2084405196876853, -5.46640284632, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [3.2084405196876853, -5.46640284632, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.002925292049365
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 5
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.629999999999999
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -3.0622985673746954
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -3
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 2.6854175279993258
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 3
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [5, -1, -3, 3, 7, 4]
+[RS] Found 1 intersections for js [1, 4, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 5.002925292049365
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 5
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -1.629999999999999
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: -1
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -3.0622985673746954
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -3
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 2.6854175279993258
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 3
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [5, -1, -3, 3, 7, 4]
+[RS] Gridspace returned indices: [5, -1, -3, 3, 7, 4]
+[RS] After loading known indices: [5, -1, -3, 3, 7, 4]
+[RS] Initial indices: [5, -1, -3, 3, 7, 4]
+[RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [5, -1, -3, 3, 7, 4]
+[RS] Generated neighbour: [5, -1, -3, 3, 7, 5]
+[RS] Generated neighbour: [5, -1, -3, 3, 8, 4]
+[RS] Generated neighbour: [5, -1, -3, 3, 8, 5]
+[RS] Generated neighbour: [5, 0, -3, 3, 7, 4]
+[RS] Generated neighbour: [5, 0, -3, 3, 7, 5]
+[RS] Generated neighbour: [5, 0, -3, 3, 8, 4]
+[RS] Generated neighbour: [5, 0, -3, 3, 8, 5]
+[RS] Found 1 cells for combo [1, 4, 5]
+[RS] Getting cells for js: [2, 3, 4]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [0.30901699437494756, -1.3090169943749477, 1.0000000000000002, 0.9510565162951535, -0.9510565162951534, -1.1805151416855452e-16, 1.6180339887498947, -1.0000000000000002, 1.6180339887498947], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-4.53, 0.57, 7.67]
+[RS] First few ds values: [-4.53, 0.57, 7.67]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-4.53, 0.57, 7.67], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [0.30901699437494756, -1.3090169943749477, 1.0000000000000002, 0.9510565162951535, -0.9510565162951534, -1.1805151416855452e-16, 1.6180339887498947, -1.0000000000000002, 1.6180339887498947], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.524013328687769, -4.850388233105284, 4.510626724674667], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.524013328687769, -4.850388233105284, 4.510626724674667]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.958041320124253
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.5819733426244653
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000002
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999985
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.510626724674667
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -5, 0, 7, 4]
+[RS] Found 1 intersections for js [2, 3, 4]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 6.958041320124253
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.5819733426244653
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.530000000000002
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -5
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999985
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999999
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.510626724674667
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -5, 0, 7, 4]
+[RS] Gridspace returned indices: [7, 0, -5, 0, 7, 4]
+[RS] After loading known indices: [7, 0, -5, 0, 7, 4]
+[RS] Initial indices: [7, 0, -5, 0, 7, 4]
+[RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] Generated neighbour: [7, 0, -5, 0, 7, 4]
+[RS] Generated neighbour: [7, 0, -5, 0, 8, 4]
+[RS] Generated neighbour: [7, 0, -5, 1, 7, 4]
+[RS] Generated neighbour: [7, 0, -5, 1, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 0, 7, 4]
+[RS] Generated neighbour: [7, 0, -4, 0, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 1, 7, 4]
+[RS] Generated neighbour: [7, 0, -4, 1, 8, 4]
+[RS] Found 1 cells for combo [2, 3, 4]
+[RS] Getting cells for js: [2, 3, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579, -0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [-0.6909830056250525, -0.6909830056250528, 0.6180339887498949, 0.9510565162951536, -0.9510565162951535, -7.295984817955648e-17, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-4.53, 0.57, 4.77]
+[RS] First few ds values: [-4.53, 0.57, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-4.53, 0.57, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [-0.6909830056250525, -0.6909830056250528, 0.6180339887498949, 0.9510565162951536, -0.9510565162951535, -7.295984817955648e-17, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.684314828612207, -4.850388233105284, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.684314828612207, -4.850388233105284, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.217414595449583
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.42167184270002567
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999998
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.830301499924438
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -4, 0, 8, 4]
+[RS] Found 1 intersections for js [2, 3, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.217414595449583
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.42167184270002567
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999999
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999998
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.830301499924438
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 8
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -4, 0, 8, 4]
+[RS] Gridspace returned indices: [7, 0, -4, 0, 8, 4]
+[RS] After loading known indices: [7, 0, -4, 0, 8, 4]
+[RS] Initial indices: [7, 0, -4, 0, 8, 4]
+[RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [7, 0, -4, 0, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 0, 8, 5]
+[RS] Generated neighbour: [7, 0, -4, 1, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 1, 8, 5]
+[RS] Generated neighbour: [7, 0, -3, 0, 8, 4]
+[RS] Generated neighbour: [7, 0, -3, 0, 8, 5]
+[RS] Generated neighbour: [7, 0, -3, 1, 8, 4]
+[RS] Generated neighbour: [7, 0, -3, 1, 8, 5]
+[RS] Found 1 cells for combo [2, 3, 5]
+[RS] Getting cells for js: [2, 4, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [-1.8090169943749475, -1.1180339887498951, 1.3090169943749475, -0.5877852522924727, -1.5388417685876263, 0.9510565162951533, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [-4.53, 7.67, 4.77]
+[RS] First few ds values: [-4.53, 7.67, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [-4.53, 7.67, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [-1.8090169943749475, -1.1180339887498951, 1.3090169943749475, -0.5877852522924727, -1.5388417685876263, 0.9510565162951533, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.863537353975316, -4.603709589454312, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.863537353975316, -4.603709589454312, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.377716095374021
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 8
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.16229856737469683
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999998
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.31062672467467145
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [8, 0, -4, 0, 7, 4]
+[RS] Found 1 intersections for js [2, 4, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.377716095374021
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 8
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.16229856737469683
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.529999999999998
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.31062672467467145
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.67
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [8, 0, -4, 0, 7, 4]
+[RS] Gridspace returned indices: [8, 0, -4, 0, 7, 4]
+[RS] After loading known indices: [8, 0, -4, 0, 7, 4]
+[RS] Initial indices: [8, 0, -4, 0, 7, 4]
+[RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [8, 0, -4, 0, 7, 4]
+[RS] Generated neighbour: [8, 0, -4, 0, 7, 5]
+[RS] Generated neighbour: [8, 0, -4, 0, 8, 4]
+[RS] Generated neighbour: [8, 0, -4, 0, 8, 5]
+[RS] Generated neighbour: [8, 0, -3, 0, 7, 4]
+[RS] Generated neighbour: [8, 0, -3, 0, 7, 5]
+[RS] Generated neighbour: [8, 0, -3, 0, 8, 4]
+[RS] Generated neighbour: [8, 0, -3, 0, 8, 5]
+[RS] Found 1 cells for combo [2, 4, 5]
+[RS] Getting cells for js: [3, 4, 5]
+[RS] Computing intersections with k_range: 0
+[RS] Coefficient matrix (before inversion):
+VecStorage { data: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579, 0.27639320225002084, -0.85065080835204, 0.4472135954999579, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Inverse matrix (after inversion):
+VecStorage { data: [-1.1180339887498951, 0.6909830056250525, 0.19098300562505266, -0.3632712640026802, -0.9510565162951536, 0.5877852522924731, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] k_combo range: [0]
+[RS] k_combo range: [0]
+[RS] Generated 1 k_combos
+[RS] ds values: [0.57, 7.67, 4.77]
+[RS] First few ds values: [0.57, 7.67, 4.77]
+[RS] ds_matrix shape: 1x3
+[RS] ds_matrix:
+VecStorage { data: [0.57, 7.67, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] coef_inv:
+VecStorage { data: [-1.1180339887498951, 0.6909830056250525, 0.19098300562505266, -0.3632712640026802, -0.9510565162951536, 0.5877852522924731, 0.0, 0.0, 1.0], nrows: Dyn(3), ncols: Dyn(3) }
+[RS] Result before transpose:
+VecStorage { data: [5.573549216388214, -4.697932447030259, 4.77], nrows: Dyn(3), ncols: Dyn(1) }
+[RS] First intersection: [5.573549216388214, -4.697932447030259, 4.77]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.118342820048692
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.3226000672991334
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.369698500075561
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999994
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999998
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -4, 0, 7, 4]
+[RS] Found 1 intersections for js [3, 4, 5]
+[RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
+[RS] Dot product 0: 7.118342820048692
+[RS] Offset 0: 0.27
+[RS] Ceil value 0: 7
+[RS] Vec 1: [0.27639320225002106, 0.8506508083520399, 0.4472135954999579]
+[RS] Dot product 1: -0.3226000672991334
+[RS] Offset 1: 0.37
+[RS] Ceil value 1: 0
+[RS] Vec 2: [-0.7236067977499788, 0.5257311121191337, 0.4472135954999579]
+[RS] Dot product 2: -4.369698500075561
+[RS] Offset 2: 0.47
+[RS] Ceil value 2: -4
+[RS] Vec 3: [-0.7236067977499789, -0.5257311121191335, 0.4472135954999579]
+[RS] Dot product 3: 0.5699999999999994
+[RS] Offset 3: 0.57
+[RS] Ceil value 3: 0
+[RS] Vec 4: [0.27639320225002084, -0.85065080835204, 0.4472135954999579]
+[RS] Dot product 4: 7.669999999999998
+[RS] Offset 4: 0.67
+[RS] Ceil value 4: 7
+[RS] Vec 5: [0.0, 0.0, 1.0]
+[RS] Dot product 5: 4.77
+[RS] Offset 5: 0.77
+[RS] Ceil value 5: 4
+[RS] Final gridspace indices: [7, 0, -4, 0, 7, 4]
+[RS] Gridspace returned indices: [7, 0, -4, 0, 7, 4]
+[RS] After loading known indices: [7, 0, -4, 0, 7, 4]
+[RS] Initial indices: [7, 0, -4, 0, 7, 4]
+[RS] Deltas: [[0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] Generated neighbour: [7, 0, -4, 0, 7, 4]
+[RS] Generated neighbour: [7, 0, -4, 0, 7, 5]
+[RS] Generated neighbour: [7, 0, -4, 0, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 0, 8, 5]
+[RS] Generated neighbour: [7, 0, -4, 1, 7, 4]
+[RS] Generated neighbour: [7, 0, -4, 1, 7, 5]
+[RS] Generated neighbour: [7, 0, -4, 1, 8, 4]
+[RS] Generated neighbour: [7, 0, -4, 1, 8, 5]
+[RS] Found 1 cells for combo [3, 4, 5]
+number of cells: 20
+Cells found.
+Filtering...
+DONE :)
