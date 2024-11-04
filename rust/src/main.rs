@@ -7,7 +7,7 @@ fn main() {
     let basis = utils::icosahedral_basis(false, HashMap::new());
     println!("Basis offsets: {:?}", basis.offsets());
     
-    let k_range = 1;
+    let k_range = 2;
     
     // Convert center_point to Vector3
     let center_point = Some(na::Vector3::new(10.0, -10.0, 10.0));
@@ -41,9 +41,22 @@ fn main() {
     println!("number of cells: {}", cells.len());
     println!("Cells found.");
     
-    // Export cells to JSON
+    // Filter cells to keep only those within a cube of size 8 (radius 4)
+    let filtered_cells = utils::filter_cells(
+        cells,
+        utils::is_point_within_cube,
+        &[4.0],  // size parameter (2 * radius)
+        center_point,
+        false,   // fast_filter
+        false,   // filter_indices
+        false,   // invert_filter
+    );
+    
+    println!("number of cells after filtering: {}", filtered_cells.len());
+    
+    // Export filtered cells to JSON
     utils::export_cells_to_json(
-        &cells,
+        &filtered_cells,
         "../cells_out_rs.json",
         center_point
     ).expect("Failed to export cells to JSON");
