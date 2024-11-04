@@ -118,7 +118,7 @@ pub struct Cell {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SerializableCell {
     pub verts: Vec<Vec<f64>>,
-    pub indices: Vec<i32>,
+    pub indices: Vec<Vec<i32>>,
     pub intersection: Vec<f64>,
     pub filled: bool,
 }
@@ -142,11 +142,17 @@ impl Cell {
 
     // Add a method to convert to serializable form
     pub fn to_serializable(&self) -> SerializableCell {
+        // Group indices into chunks of 6 (since each vertex has 6 coordinates)
+        let indices: Vec<Vec<i32>> = self.indices
+            .chunks(6)
+            .map(|chunk| chunk.to_vec())
+            .collect();
+
         SerializableCell {
             verts: self.verts.iter()
                 .map(|v| vec![v[0], v[1], v[2]])
                 .collect(),
-            indices: self.indices.clone(),
+            indices,
             intersection: vec![
                 self.intersection[0],
                 self.intersection[1],
@@ -265,7 +271,7 @@ struct TriangleData {
 #[derive(Serialize, Deserialize)]
 struct CellData {
     vertices: Vec<Vec<f64>>,
-    indices: Vec<i32>,
+    indices: Vec<Vec<i32>>,
     intersection: Vec<f64>,
     filled: bool,
     face_indices: Vec<Vec<usize>>,

@@ -1,18 +1,15 @@
 import dualgrid as dg
-import matplotlib.pyplot as plt
-import networkx as nx
-import numpy as np
 
 def main():
     # Make a Basis object. There are some presets available in the `utils`.
-    basis = dg.utils.icosahedral_basis()
+    basis = dg.utils.icosahedral_basis(random_offsets=False)
     print("OFFSETS:", basis.offsets)
     
-    k_range = 2
+    k_range = 0
     
     # Add center_point parameter to dualgrid_method call
-    center_point = [-10.0, 10.0, -10.0] # this is off by a factor of 2 for some reason
-    cells = dg.dualgrid_method(basis, k_range, center_point=center_point)
+    center_point = [10.0, -10.0, 10.0]
+    cells = dg.dualgrid_method(basis, k_range, center_point=center_point, single_threaded=True)
     print("number of cells:", len(cells))
     
     print("Cells found.\nFiltering...")
@@ -24,7 +21,7 @@ def main():
     
     # print("Number of cells filtered:", len(cells))
     
-    dg.utils.export_cells_to_json(cells, "cells_out.json", center_point=center_point)
+    dg.utils.export_cells_to_json(cells, "../cells_out_py.json", center_point=center_point)
     print("DONE :)")
 
 

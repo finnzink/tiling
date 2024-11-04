@@ -261,50 +261,63 @@ fn get_neighbours(
     ks: &[i32],
     basis: &Basis
 ) -> Vec<Vec<i32>> {
+    println!("[RS] get_neighbours input:");
+    println!("[RS]   js: {:?}", js);
+    println!("[RS]   ks: {:?}", ks);
+    
+    // Get initial indices from gridspace
     let mut indices = basis.gridspace(intersection);
     println!("[RS] Gridspace returned indices: {:?}", indices);
-    
-    // Load known indices
+
+    // Create a copy of the original indices
+    let original_indices = indices.clone();
+
+    // Load known indices - but only for the specific js indices
     for (index, &j) in js.iter().enumerate() {
         indices[j] = ks[index];
     }
+    
+    // For non-js indices, restore the original values
+    for i in 0..indices.len() {
+        if !js.contains(&i) {
+            indices[i] = original_indices[i];
+        }
+    }
+
     println!("[RS] After loading known indices: {:?}", indices);
     println!("[RS] Initial indices: {:?}", indices);
-    
-    // Generate directions - all possible combinations of 0s and 1s
+
+    // Generate directions - use js.len() instead of basis.dimensions
     let directions: Vec<Vec<i32>> = (0..js.len())
         .map(|_| vec![0, 1])
         .multi_cartesian_product()
         .collect();
-    
+
     // Generate deltas
-    let deltas: Vec<Vec<i32>> = js.iter().enumerate()
-        .map(|(i, &j)| {
-            let mut delta = vec![0; basis.vecs.len()];
-            delta[j] = 1;
-            delta
+    let deltas: Vec<Vec<i32>> = (0..js.len())
+        .map(|i| {
+            (0..basis.vecs.len())
+                .map(|j| if js[i] == j { 1 } else { 0 })
+                .collect()
         })
         .collect();
-    
+
     println!("[RS] Deltas: {:?}", deltas);
-    
+    println!("[RS] First neighbour: {:?}", directions[0]);
+
     // Generate neighbours
-    let mut neighbours = Vec::new();
-    for direction in directions {
-        let mut neighbour = indices.clone();
-        for (i, &d) in direction.iter().enumerate() {
-            if d == 1 {
-                // Add the corresponding delta
-                for (j, &delta) in deltas[i].iter().enumerate() {
-                    neighbour[j] += delta;
+    directions.iter()
+        .map(|direction| {
+            let mut neighbour = indices.clone();
+            for (i, &e) in direction.iter().enumerate() {
+                for (j, delta) in deltas[i].iter().enumerate() {
+                    neighbour[j] += e * delta;
                 }
             }
-        }
-        println!("[RS] Generated neighbour: {:?}", neighbour);
-        neighbours.push(neighbour);
-    }
-    
-    neighbours
+            println!("[RS] Generated neighbour: {:?}", neighbour);
+            neighbour
+        })
+        .collect()
 }
 
 fn get_cells_from_construction_sets(

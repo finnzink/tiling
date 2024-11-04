@@ -57,6 +57,9 @@ VecStorage { data: [4.787383539249433, -5.808769247083543, 4.4453791404248175], 
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -2, -5, 2, 8, 4]
 [RS] Found 1 intersections for js [0, 1, 2]
+[RS] get_neighbours input:
+[RS]   js: [0, 1, 2]
+[RS]   ks: [6, -2, -5]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.2700000000000005
 [RS] Offset 0: 0.27
@@ -86,6 +89,7 @@ VecStorage { data: [4.787383539249433, -5.808769247083543, 4.4453791404248175], 
 [RS] After loading known indices: [6, -2, -5, 2, 8, 4]
 [RS] Initial indices: [6, -2, -5, 2, 8, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -5, 2, 8, 4]
 [RS] Generated neighbour: [6, -2, -4, 2, 8, 4]
 [RS] Generated neighbour: [6, -1, -5, 2, 8, 4]
@@ -140,6 +144,9 @@ VecStorage { data: [5.291234255562085, -5.442700273916435, 3.437677707799512], n
 [RS] Ceil value 5: 3
 [RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
 [RS] Found 1 intersections for js [0, 1, 3]
+[RS] get_neighbours input:
+[RS]   js: [0, 1, 3]
+[RS]   ks: [6, -2, 0]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -169,6 +176,7 @@ VecStorage { data: [5.291234255562085, -5.442700273916435, 3.437677707799512], n
 [RS] After loading known indices: [6, -2, -5, 0, 7, 3]
 [RS] Initial indices: [6, -2, -5, 0, 7, 3]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -5, 0, 7, 3]
 [RS] Generated neighbour: [6, -2, -5, 1, 7, 3]
 [RS] Generated neighbour: [6, -1, -5, 0, 7, 3]
@@ -223,6 +231,9 @@ VecStorage { data: [5.258610463437158, -5.466402846320002, 3.5029252920493654], 
 [RS] Ceil value 5: 3
 [RS] Final gridspace indices: [6, -2, -5, 1, 8, 3]
 [RS] Found 1 intersections for js [0, 1, 4]
+[RS] get_neighbours input:
+[RS]   js: [0, 1, 4]
+[RS]   ks: [6, -2, 8]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -252,6 +263,7 @@ VecStorage { data: [5.258610463437158, -5.466402846320002, 3.5029252920493654], 
 [RS] After loading known indices: [6, -2, -5, 1, 8, 3]
 [RS] Initial indices: [6, -2, -5, 1, 8, 3]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -5, 1, 8, 3]
 [RS] Generated neighbour: [6, -2, -5, 1, 9, 3]
 [RS] Generated neighbour: [6, -1, -5, 1, 8, 3]
@@ -306,6 +318,9 @@ VecStorage { data: [4.625073109461841, -5.926694677063055, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -1, -4, 2, 8, 4]
 [RS] Found 1 intersections for js [0, 1, 5]
+[RS] get_neighbours input:
+[RS]   js: [0, 1, 5]
+[RS]   ks: [6, -1, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -335,6 +350,7 @@ VecStorage { data: [4.625073109461841, -5.926694677063055, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [6, -1, -4, 2, 8, 4]
 [RS] Initial indices: [6, -1, -4, 2, 8, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -1, -4, 2, 8, 4]
 [RS] Generated neighbour: [6, -1, -4, 2, 8, 5]
 [RS] Generated neighbour: [6, 0, -4, 2, 8, 4]
@@ -389,6 +405,9 @@ VecStorage { data: [5.0987804071866325, -4.850388233105285, 3.8225854045504164],
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -1, -5, 1, 7, 4]
 [RS] Found 1 intersections for js [0, 2, 3]
+[RS] get_neighbours input:
+[RS]   js: [0, 2, 3]
+[RS]   ks: [6, -5, 1]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -418,6 +437,7 @@ VecStorage { data: [5.0987804071866325, -4.850388233105285, 3.8225854045504164],
 [RS] After loading known indices: [6, -1, -5, 1, 7, 4]
 [RS] Initial indices: [6, -1, -5, 1, 7, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -1, -5, 1, 7, 4]
 [RS] Generated neighbour: [6, -1, -5, 2, 7, 4]
 [RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
@@ -472,6 +492,9 @@ VecStorage { data: [4.967376207875072, -5.254808774042164, 4.085393803173535], n
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
 [RS] Found 1 intersections for js [0, 2, 4]
+[RS] get_neighbours input:
+[RS]   js: [0, 2, 4]
+[RS]   ks: [6, -4, 7]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.269999999999998
 [RS] Offset 0: 0.27
@@ -501,6 +524,7 @@ VecStorage { data: [4.967376207875072, -5.254808774042164, 4.085393803173535], n
 [RS] After loading known indices: [6, -1, -4, 1, 7, 4]
 [RS] Initial indices: [6, -1, -4, 1, 7, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
 [RS] Generated neighbour: [6, -1, -4, 1, 8, 4]
 [RS] Generated neighbour: [6, -1, -3, 1, 7, 4]
@@ -555,6 +579,9 @@ VecStorage { data: [4.625073109461841, -6.308309384752654, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -2, -5, 2, 9, 4]
 [RS] Found 1 intersections for js [0, 2, 5]
+[RS] get_neighbours input:
+[RS]   js: [0, 2, 5]
+[RS]   ks: [6, -5, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -584,6 +611,7 @@ VecStorage { data: [4.625073109461841, -6.308309384752654, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [6, -2, -5, 2, 9, 4]
 [RS] Initial indices: [6, -2, -5, 2, 9, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -5, 2, 9, 4]
 [RS] Generated neighbour: [6, -2, -5, 2, 9, 5]
 [RS] Generated neighbour: [6, -2, -4, 2, 9, 4]
@@ -638,6 +666,9 @@ VecStorage { data: [5.3113968679372, -5.504754414089775, 3.3973524830492785], nr
 [RS] Ceil value 5: 3
 [RS] Final gridspace indices: [6, -2, -5, 0, 7, 3]
 [RS] Found 1 intersections for js [0, 3, 4]
+[RS] get_neighbours input:
+[RS]   js: [0, 3, 4]
+[RS]   ks: [6, 0, 7]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.269999999999998
 [RS] Offset 0: 0.27
@@ -667,6 +698,7 @@ VecStorage { data: [5.3113968679372, -5.504754414089775, 3.3973524830492785], nr
 [RS] After loading known indices: [6, -2, -5, 0, 7, 3]
 [RS] Initial indices: [6, -2, -5, 0, 7, 3]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -5, 0, 7, 3]
 [RS] Generated neighbour: [6, -2, -5, 0, 8, 3]
 [RS] Generated neighbour: [6, -2, -5, 1, 7, 3]
@@ -721,6 +753,9 @@ VecStorage { data: [4.625073109461841, -3.3924670814579168, 4.77], nrows: Dyn(3)
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, 1, -3, 1, 6, 4]
 [RS] Found 1 intersections for js [0, 3, 5]
+[RS] get_neighbours input:
+[RS]   js: [0, 3, 5]
+[RS]   ks: [6, 1, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -750,6 +785,7 @@ VecStorage { data: [4.625073109461841, -3.3924670814579168, 4.77], nrows: Dyn(3)
 [RS] After loading known indices: [6, 1, -3, 1, 6, 4]
 [RS] Initial indices: [6, 1, -3, 1, 6, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, 1, -3, 1, 6, 4]
 [RS] Generated neighbour: [6, 1, -3, 1, 6, 5]
 [RS] Generated neighbour: [6, 1, -3, 2, 6, 4]
@@ -804,6 +840,9 @@ VecStorage { data: [4.625073109461841, -5.006111015576947, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -1, -4, 1, 7, 4]
 [RS] Found 1 intersections for js [0, 4, 5]
+[RS] get_neighbours input:
+[RS]   js: [0, 4, 5]
+[RS]   ks: [6, 7, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.27
 [RS] Offset 0: 0.27
@@ -833,6 +872,7 @@ VecStorage { data: [4.625073109461841, -5.006111015576947, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [6, -1, -4, 1, 7, 4]
 [RS] Initial indices: [6, -1, -4, 1, 7, 4]
 [RS] Deltas: [[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -1, -4, 1, 7, 4]
 [RS] Generated neighbour: [6, -1, -4, 1, 7, 5]
 [RS] Generated neighbour: [6, -1, -4, 1, 8, 4]
@@ -887,6 +927,9 @@ VecStorage { data: [4.475986671312231, -4.850388233105284, 2.814883971925111], n
 [RS] Ceil value 5: 3
 [RS] Final gridspace indices: [5, -2, -5, 1, 6, 3]
 [RS] Found 1 intersections for js [1, 2, 3]
+[RS] get_neighbours input:
+[RS]   js: [1, 2, 3]
+[RS]   ks: [-2, -5, 1]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 5.262298567374694
 [RS] Offset 0: 0.27
@@ -916,6 +959,7 @@ VecStorage { data: [4.475986671312231, -4.850388233105284, 2.814883971925111], n
 [RS] After loading known indices: [5, -2, -5, 1, 6, 3]
 [RS] Initial indices: [5, -2, -5, 1, 6, 3]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [5, -2, -5, 1, 6, 3]
 [RS] Generated neighbour: [5, -2, -5, 2, 6, 3]
 [RS] Generated neighbour: [5, -2, -4, 1, 6, 3]
@@ -970,6 +1014,9 @@ VecStorage { data: [4.676141952312988, -5.46640284632, 3.862910629300648], nrows
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [6, -2, -4, 1, 7, 4]
 [RS] Found 1 intersections for js [1, 2, 4]
+[RS] get_neighbours input:
+[RS]   js: [1, 2, 4]
+[RS]   ks: [-2, -4, 7]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 5.910014662748716
 [RS] Offset 0: 0.27
@@ -999,6 +1046,7 @@ VecStorage { data: [4.676141952312988, -5.46640284632, 3.862910629300648], nrows
 [RS] After loading known indices: [6, -2, -4, 1, 7, 4]
 [RS] Initial indices: [6, -2, -4, 1, 7, 4]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [6, -2, -4, 1, 7, 4]
 [RS] Generated neighbour: [6, -2, -4, 1, 8, 4]
 [RS] Generated neighbour: [6, -2, -3, 1, 7, 4]
@@ -1053,6 +1101,9 @@ VecStorage { data: [4.849380606699689, -5.999576600928339, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [7, -2, -4, 2, 8, 4]
 [RS] Found 1 intersections for js [1, 2, 5]
+[RS] get_neighbours input:
+[RS]   js: [1, 2, 5]
+[RS]   ks: [-2, -4, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.47062672467467
 [RS] Offset 0: 0.27
@@ -1082,6 +1133,7 @@ VecStorage { data: [4.849380606699689, -5.999576600928339, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [7, -2, -4, 2, 8, 4]
 [RS] Initial indices: [7, -2, -4, 2, 8, 4]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [7, -2, -4, 2, 8, 4]
 [RS] Generated neighbour: [7, -2, -4, 2, 8, 5]
 [RS] Generated neighbour: [7, -2, -3, 2, 8, 4]
@@ -1136,6 +1188,9 @@ VecStorage { data: [5.323858047687011, -5.466402846320002, 3.4626000672991344], 
 [RS] Ceil value 5: 3
 [RS] Final gridspace indices: [7, -2, -5, 1, 8, 3]
 [RS] Found 1 intersections for js [1, 3, 4]
+[RS] get_neighbours input:
+[RS]   js: [1, 3, 4]
+[RS]   ks: [-2, 1, 8]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.3103252247502315
 [RS] Offset 0: 0.27
@@ -1165,6 +1220,7 @@ VecStorage { data: [5.323858047687011, -5.466402846320002, 3.4626000672991344], 
 [RS] After loading known indices: [7, -2, -5, 1, 8, 3]
 [RS] Initial indices: [7, -2, -5, 1, 8, 3]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [7, -2, -5, 1, 8, 3]
 [RS] Generated neighbour: [7, -2, -5, 1, 9, 3]
 [RS] Generated neighbour: [7, -2, -5, 2, 8, 3]
@@ -1219,6 +1275,9 @@ VecStorage { data: [7.035266778037107, -6.709814071719005, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [9, -2, -6, 1, 10, 4]
 [RS] Found 1 intersections for js [1, 3, 5]
+[RS] get_neighbours input:
+[RS]   js: [1, 3, 5]
+[RS]   ks: [-2, 1, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 8.425742752749557
 [RS] Offset 0: 0.27
@@ -1248,6 +1307,7 @@ VecStorage { data: [7.035266778037107, -6.709814071719005, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [9, -2, -6, 1, 10, 4]
 [RS] Initial indices: [9, -2, -6, 1, 10, 4]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [9, -2, -6, 1, 10, 4]
 [RS] Generated neighbour: [9, -2, -6, 1, 10, 5]
 [RS] Generated neighbour: [9, -2, -6, 2, 10, 4]
@@ -1302,6 +1362,9 @@ VecStorage { data: [3.2084405196876853, -5.46640284632, 4.77], nrows: Dyn(3), nc
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [5, -1, -3, 3, 7, 4]
 [RS] Found 1 intersections for js [1, 4, 5]
+[RS] get_neighbours input:
+[RS]   js: [1, 4, 5]
+[RS]   ks: [-1, 7, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 5.002925292049365
 [RS] Offset 0: 0.27
@@ -1331,6 +1394,7 @@ VecStorage { data: [3.2084405196876853, -5.46640284632, 4.77], nrows: Dyn(3), nc
 [RS] After loading known indices: [5, -1, -3, 3, 7, 4]
 [RS] Initial indices: [5, -1, -3, 3, 7, 4]
 [RS] Deltas: [[0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [5, -1, -3, 3, 7, 4]
 [RS] Generated neighbour: [5, -1, -3, 3, 7, 5]
 [RS] Generated neighbour: [5, -1, -3, 3, 8, 4]
@@ -1385,6 +1449,9 @@ VecStorage { data: [5.524013328687769, -4.850388233105284, 4.510626724674667], n
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [7, 0, -5, 0, 7, 4]
 [RS] Found 1 intersections for js [2, 3, 4]
+[RS] get_neighbours input:
+[RS]   js: [2, 3, 4]
+[RS]   ks: [-5, 0, 7]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 6.958041320124253
 [RS] Offset 0: 0.27
@@ -1414,6 +1481,7 @@ VecStorage { data: [5.524013328687769, -4.850388233105284, 4.510626724674667], n
 [RS] After loading known indices: [7, 0, -5, 0, 7, 4]
 [RS] Initial indices: [7, 0, -5, 0, 7, 4]
 [RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [7, 0, -5, 0, 7, 4]
 [RS] Generated neighbour: [7, 0, -5, 0, 8, 4]
 [RS] Generated neighbour: [7, 0, -5, 1, 7, 4]
@@ -1468,6 +1536,9 @@ VecStorage { data: [5.684314828612207, -4.850388233105284, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [7, 0, -4, 0, 8, 4]
 [RS] Found 1 intersections for js [2, 3, 5]
+[RS] get_neighbours input:
+[RS]   js: [2, 3, 5]
+[RS]   ks: [-4, 0, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 7.217414595449583
 [RS] Offset 0: 0.27
@@ -1497,6 +1568,7 @@ VecStorage { data: [5.684314828612207, -4.850388233105284, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [7, 0, -4, 0, 8, 4]
 [RS] Initial indices: [7, 0, -4, 0, 8, 4]
 [RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [7, 0, -4, 0, 8, 4]
 [RS] Generated neighbour: [7, 0, -4, 0, 8, 5]
 [RS] Generated neighbour: [7, 0, -4, 1, 8, 4]
@@ -1551,6 +1623,9 @@ VecStorage { data: [5.863537353975316, -4.603709589454312, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [8, 0, -4, 0, 7, 4]
 [RS] Found 1 intersections for js [2, 4, 5]
+[RS] get_neighbours input:
+[RS]   js: [2, 4, 5]
+[RS]   ks: [-4, 7, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 7.377716095374021
 [RS] Offset 0: 0.27
@@ -1580,6 +1655,7 @@ VecStorage { data: [5.863537353975316, -4.603709589454312, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [8, 0, -4, 0, 7, 4]
 [RS] Initial indices: [8, 0, -4, 0, 7, 4]
 [RS] Deltas: [[0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [8, 0, -4, 0, 7, 4]
 [RS] Generated neighbour: [8, 0, -4, 0, 7, 5]
 [RS] Generated neighbour: [8, 0, -4, 0, 8, 4]
@@ -1634,6 +1710,9 @@ VecStorage { data: [5.573549216388214, -4.697932447030259, 4.77], nrows: Dyn(3),
 [RS] Ceil value 5: 4
 [RS] Final gridspace indices: [7, 0, -4, 0, 7, 4]
 [RS] Found 1 intersections for js [3, 4, 5]
+[RS] get_neighbours input:
+[RS]   js: [3, 4, 5]
+[RS]   ks: [0, 7, 4]
 [RS] Vec 0: [0.8944271909999159, 0.0, 0.4472135954999579]
 [RS] Dot product 0: 7.118342820048692
 [RS] Offset 0: 0.27
@@ -1663,6 +1742,7 @@ VecStorage { data: [5.573549216388214, -4.697932447030259, 4.77], nrows: Dyn(3),
 [RS] After loading known indices: [7, 0, -4, 0, 7, 4]
 [RS] Initial indices: [7, 0, -4, 0, 7, 4]
 [RS] Deltas: [[0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1]]
+[RS] First neighbour: [0, 0, 0]
 [RS] Generated neighbour: [7, 0, -4, 0, 7, 4]
 [RS] Generated neighbour: [7, 0, -4, 0, 7, 5]
 [RS] Generated neighbour: [7, 0, -4, 0, 8, 4]

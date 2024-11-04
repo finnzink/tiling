@@ -6,3 +6,4 @@ stl_test_new*
 benchmarks/
 tests/testout/*.pdf
 tests/testout/*.npy
+rust/target/

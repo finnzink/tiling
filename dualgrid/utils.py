@@ -14,7 +14,7 @@ def offsets_fixed_around_centre(n):
     """
     return np.array([1/n for _i in range(n)])
 
-def generate_offsets(num, random, below_one=False, sum_zero=False, centred=False):
+def generate_offsets(num, random=True, below_one=False, sum_zero=False, centred=False):
     """
     Generates offsets for use in the dualgrid method.
     num: Number of offsets to generate. Usually the same as the number of basis vectors.
@@ -27,16 +27,16 @@ def generate_offsets(num, random, below_one=False, sum_zero=False, centred=False
         return offsets_fixed_around_centre(num)
 
     if random:
-        rng = np.random.default_rng(int(time.time() * 10))
+        offsets = np.random.random(num)
     else:
-        rng = np.random.default_rng(37123912)  # Arbitrary seed
+        # Fixed offsets for deterministic results
+        offsets = np.array([0.27, 0.37, 0.47, 0.57, 0.67, 0.77][:num])
 
-    offsets = rng.random(num)
     if below_one:
         offsets /= num
 
     if sum_zero:
-        offsets[-1] = -np.sum(offsets)
+        offsets[-1] = -np.sum(offsets[:-1])
 
     return offsets
 
@@ -56,6 +56,13 @@ def icosahedral_basis(random_offsets=True, **kwargs):
         for n in range(5)
     ]
     icos.append(np.array([0.0, 0.0, 1.0]))
+    
+    # Debug print
+    print("Python icosahedral basis:")
+    for i, vec in enumerate(icos):
+        print(f"v{i}: [{vec[0]:.6f}, {vec[1]:.6f}, {vec[2]:.6f}]")
+    print("Offsets:", offsets)
+    
     return dg.Basis(np.array(icos), offsets)
 
 
@@ -121,10 +128,9 @@ def filter_cells(cells, filter, filter_args=[], filter_centre=None, fast_filter=
         filter_centre = get_centre_of_interest(cells)
         print("COI:", filter_centre)
 
-    cells = np.array(cells)
     filter_results = [c.is_in_filter(filter, filter_centre, filter_args, fast=fast_filter, filter_indices=filter_indices, invert_filter=invert_filter) for c in cells]
-
-    return cells[filter_results]
+    
+    return [cell for cell, keep in zip(cells, filter_results) if keep]
 
 
 def to_native(obj):

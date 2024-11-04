@@ -56,7 +56,7 @@ fn main() {
     // Export cells to JSON
     utils::export_cells_to_json(
         &filtered_cells,
-        "../cells_out.json",
+        "../cells_out_rs.json",
         center_point
     ).expect("Failed to export cells to JSON");
     
