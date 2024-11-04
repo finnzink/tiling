@@ -38,82 +38,100 @@ impl ConstructionSet {
         println!("[RS] self.offset: {:?}", self.offset);
         println!("[RS] others normals: {:?}", others.iter().map(|o| &o.normal).collect::<Vec<_>>());
         println!("[RS] others offsets: {:?}", others.iter().map(|o| o.offset).collect::<Vec<_>>());
+        
         let dimensions = self.normal.len();
-        let mut coef_matrix = vec![self.normal.clone()];
+        
+        // Create coefficient matrix as a 2D array first
+        let mut coef_matrix_data: Vec<f64> = Vec::with_capacity(dimensions * dimensions);
+        coef_matrix_data.extend(&self.normal);
         for other in others {
-            coef_matrix.push(other.normal.clone());
+            coef_matrix_data.extend(&other.normal);
+        }
+        
+        let coef_matrix: na::DMatrix<f64> = na::DMatrix::from_row_slice(
+            dimensions,
+            dimensions,
+            &coef_matrix_data
+        );
+
+        // Check determinant
+        if coef_matrix.determinant() == 0.0 {
+            println!("WARNING: Unit vectors form singular matrices.");
+            return (vec![], vec![]);
         }
 
-        let matrix_size = coef_matrix.len();
-        let coef_matrix = na::DMatrix::from_vec(
-            matrix_size,
-            matrix_size,
-            coef_matrix.into_iter().flatten().collect()
-        );
-        
-        let coef_inv = coef_matrix.try_inverse()
+        let coef_inv: na::DMatrix<f64> = coef_matrix.try_inverse()
             .expect("Failed to invert coefficient matrix");
 
         // Get k combinations
         let k_combos = get_k_combos(k_range, dimensions);
 
-        let base_offsets = std::iter::once(self.offset)
-            .chain(others.iter().map(|o| o.offset))
-            .collect::<Vec<_>>();
+        // Get the base offsets
+        let mut base_offsets = vec![self.offset];
+        base_offsets.extend(others.iter().map(|o| o.offset));
 
-        let mut ds = Vec::new();
+        let mut intersections = Vec::new();
         let mut final_k_combos = Vec::new();
-        for k_combo in &k_combos {
-            let mut current_ds = Vec::new();
-            let mut final_k_combo = Vec::new();
-            
-            if let Some(cp) = center_point {
-                // Calculate center planes
-                let center_planes = std::iter::once(dot_product(&self.normal, cp))
-                    .chain(others.iter().map(|o| dot_product(&o.normal, cp)))
-                    .collect::<Vec<_>>();
-                
-                // Calculate center indices
-                let center_indices: Vec<f64> = center_planes.iter()
+
+        if let Some(cp) = center_point {
+            // Calculate the plane indices for the center point
+            let center_planes: Vec<f64> = std::iter::once(&self.normal)
+                .chain(others.iter().map(|o| &o.normal))
+                .map(|normal| {
+                    normal.iter().zip(cp.iter()).map(|(n, p)| n * p).sum()
+                })
+                .collect();
+
+            // Calculate center indices
+            let center_indices: Vec<f64> = center_planes.iter()
+                .zip(base_offsets.iter())
+                .map(|(&plane, &offset)| (plane - offset).floor())
+                .collect();
+
+            // Process each k_combo with center point adjustment
+            for k_combo in k_combos {
+                let ds: Vec<f64> = k_combo.iter()
+                    .zip(center_indices.iter())
                     .zip(base_offsets.iter())
-                    .map(|(&plane, &offset)| (plane - offset).floor())
+                    .map(|((&k, &center_idx), &offset)| {
+                        offset + (k as f64 + center_idx)
+                    })
                     .collect();
 
-                // Apply offsets with adjusted k values
-                for ((&k, &center_idx), &offset) in k_combo.iter()
+                let adjusted_k_combo: Vec<i32> = k_combo.iter()
                     .zip(center_indices.iter())
-                    .zip(base_offsets.iter()) 
-                {
-                    let adjusted_k = k as f64 + center_idx;
-                    current_ds.push(offset + adjusted_k);
-                    final_k_combo.push(k + center_idx as i32);
-                }
-            } else {
-                // Original logic for when no center point is provided
-                for (k, &offset) in k_combo.iter().zip(base_offsets.iter()) {
-                    let value = offset + *k as f64;
-                    current_ds.push(value);
-                    final_k_combo.push(*k);
-                }
+                    .map(|(&k, &center_idx)| k + center_idx as i32)
+                    .collect();
+
+                let ds_matrix: na::DMatrix<f64> = na::DMatrix::from_column_slice(dimensions, 1, &ds);
+                let result: na::DMatrix<f64> = &coef_inv * &ds_matrix;
+                
+                let intersection: Vec<f64> = (0..dimensions)
+                    .map(|i| result[(i, 0)])
+                    .collect();
+
+                intersections.push(intersection);
+                final_k_combos.push(adjusted_k_combo);
             }
-            
-            ds.extend(current_ds);
-            final_k_combos.push(final_k_combo);
+        } else {
+            // Process each k_combo without center point adjustment
+            for k_combo in k_combos {
+                let ds: Vec<f64> = k_combo.iter()
+                    .zip(base_offsets.iter())
+                    .map(|(&k, &offset)| offset + k as f64)
+                    .collect();
+
+                let ds_matrix: na::DMatrix<f64> = na::DMatrix::from_column_slice(dimensions, 1, &ds);
+                let result: na::DMatrix<f64> = &coef_inv * &ds_matrix;
+                
+                let intersection: Vec<f64> = (0..dimensions)
+                    .map(|i| result[(i, 0)])
+                    .collect();
+
+                intersections.push(intersection);
+                final_k_combos.push(k_combo.to_vec());
+            }
         }
-
-        // Create ds as a column vector with explicit layout
-        let ds_matrix = na::DMatrix::from_vec(matrix_size, 1, ds);
-        
-        // Try transposing coef_inv before multiplication
-        let result = &coef_inv.transpose() * &ds_matrix;
-
-        let intersections: Vec<Vec<f64>> = (0..result.ncols())
-            .map(|col| {
-                (0..result.nrows())
-                    .map(|row| result[(row, col)])
-                    .collect()
-            })
-            .collect();
 
         (intersections, final_k_combos)
     }
