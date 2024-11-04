@@ -36,6 +36,12 @@ class ConstructionSet:
         Calculates all intersections between this set of lines/planes and another.
         center_point: Point in real space to center the k_range around
         """
+        print(f"\n[PY] get_intersections_with details:")
+        print(f"[PY] k_range: {k_range}")
+        print(f"[PY] self.normal: {self.normal}")
+        print(f"[PY] self.offset: {self.offset}")
+        print(f"[PY] others normals: {[o.normal for o in others]}")
+        print(f"[PY] others offsets: {[o.offset for o in others]}")
         dimensions = len(self.normal)
         coef_matrix = np.array([self.normal, *[o.normal for o in others]])
 
@@ -71,40 +77,49 @@ class ConstructionSet:
 
         return intersections, k_combos
 
-def _get_neighbours(intersection, js, ks, basis):
-    """
-    For a given intersection, this function returns the grid-space indices of the spaces surrounding the intersection.
-    A "grid-space index" is an N dimensional vector of integer values where N is the number of basis vectors. Each element
-    corresponds to an integer multiple of a basis vector, which gives the final location of the tile vertex.
+def _get_neighbours(intersection, js, ks, basis, cell_index):
+    if cell_index == 2:  # Only log for Cell 2 (index 1)
+        print("\n[PY] Cell 2 neighbour calculation:")
+        print(f"[PY] Input intersection: {intersection}")
+        print(f"[PY] Input js: {js}")
+        print(f"[PY] Input ks: {ks}")
+        
+        indices = basis.gridspace(intersection)
+        print(f"[PY] Initial gridspace indices: {indices}")
+        
+        for i, j in enumerate(js):
+            indices[j] = ks[i]
+        print(f"[PY] After setting js indices: {indices}")
+        
+        directions = np.array(list(itertools.product(*[[0, 1] for _i in range(basis.dimensions)])))
+        print(f"[PY] Directions: {directions}")
+        
+        deltas = [np.array([(j == js[i]) * 1 for j in range(len(basis.vecs))]) for i in range(basis.dimensions)]
+        print(f"[PY] Deltas: {deltas}")
+        
+        neighbours = [np.array([v for v in indices]) for _i in range(len(directions))]
+        for i, e in enumerate(directions):
+            neighbours[i] += np.dot(e, deltas)
+        print(f"[PY] Final neighbours: {neighbours}")
+        
+        return neighbours
+    else:
+        # Original code without logging
+        indices = basis.gridspace(intersection)
+        
+        for i, j in enumerate(js):
+            indices[j] = ks[i]
+        
+        directions = np.array(list(itertools.product(*[[0, 1] for _i in range(basis.dimensions)])))
 
-    There will always be a set number of neighbours depending on the number of dimensions. For 2D this is 4 (to form a tile),
-    for 3D this is 8 (to form a cube), etc...
-    """
-    
-    # Get initial indices
-    indices = basis.gridspace(intersection)
-    
-    # Load known indices
-    for i, j in enumerate(js):
-        indices[j] = ks[i]
-
-    # Each possible neighbour of intersection. See eq. 4.5 in de Bruijn paper
-    # For example:
-    # [0, 0], [0, 1], [1, 0], [1, 1] for 2D
-    directions = np.array(list(itertools.product(*[[0, 1] for _i in range(basis.dimensions)])))
-
-    # Copy the intersection indices. This is then incremented for the remaining indices depending on what neighbour it is.
-    neighbours = [ np.array([ v for v in indices ]) for _i in range(len(directions)) ]
-
-    # Quick note: Kronecker delta function -> (i == j) = False (0) or True (1) in python. Multiplication of bool is allowed
-    # Also from de Bruijn paper 1.
-    deltas = [np.array([(j == js[i]) * 1 for j in range(len(basis.vecs))]) for i in range(basis.dimensions)]
-
-    # Apply equation 4.5 in de Bruijn's paper 1, expanded for any basis len and extra third dimension
-    for i, e in enumerate(directions): # e Corresponds to epsilon in paper
-        neighbours[i] += np.dot(e, deltas)
-
-    return neighbours
+        neighbours = [np.array([v for v in indices]) for _i in range(len(directions))]
+        
+        deltas = [np.array([(j == js[i]) * 1 for j in range(len(basis.vecs))]) for i in range(basis.dimensions)]
+        
+        for i, e in enumerate(directions):
+            neighbours[i] += np.dot(e, deltas)
+        
+        return neighbours
 
 
 class Basis:
@@ -220,34 +235,40 @@ def get_edges_from_indices(indices):
     return np.array(edges)
 
 def _get_cells_from_construction_sets(construction_sets, k_range, basis, shape_accuracy, js, center_point=None):
+    others = [construction_sets[j] for j in js[1:]]
+    
+    # Add debug info before intersection calculation
+    print(f"\n[PY] Calculating intersections for js: {js}")
+    print(f"[PY] First normal: {construction_sets[js[0]].normal}")
+    print(f"[PY] Other normals: {[o.normal for o in others]}")
+    
     intersections, k_combos = construction_sets[js[0]].get_intersections_with(
         k_range, 
-        [construction_sets[j] for j in js[1:]], 
+        others,
         center_point=center_point
     )
     
-    cells = []
-    for i, intersection in enumerate(intersections):
-        # Calculate neighbours for this intersection
-        indices_set = _get_neighbours(intersection, js, k_combos[i], basis)
-        
-        vertices_set = []
-        for indices in indices_set:
-            vertex = basis.realspace(indices)
-            vertices_set.append(vertex)
+    # Add debug info after intersection calculation
+    print(f"[PY] First two intersections: {intersections[:2]}")
+    print(f"[PY] First two k_combos: {k_combos[:2]}")
 
-        vertices_set = np.array(vertices_set)
+    cells = []
+    for i, (intersection, k_combo) in enumerate(zip(intersections, k_combos)):
+        indices_set = _get_neighbours(intersection, js, k_combo, basis, i)
+        vertices_set = [basis.realspace(indices) for indices in indices_set]
+        
         c = Cell(vertices_set, indices_set, intersection)
         cells.append(c)
         
-        # Only log information for cells 2 and 3
-        if len(cells) in [2, 3]:  # indices 2 and 3
-            print(f"[PY] Cell {len(cells)-1}:")
-            print(f"[PY]   Intersection: {intersection}")
-            print(f"[PY]   k_combo: {k_combos[i]}")
-            print(f"[PY]   Indices set: {indices_set}")
-            print(f"[PY]   Vertices set: {vertices_set}")
-
+        # Only log for cells 1 and 2
+        if i in [1, 2]:
+            print(f"\n[PY] Processing cell {i}")
+            print(f"[PY] js: {js}")
+            print(f"[PY] Intersection: {intersection}")
+            print(f"[PY] k_combo: {k_combo}")
+            print(f"[PY] Indices set: {indices_set}")
+            print(f"[PY] Vertices set: {vertices_set}")
+    
     return cells
 
 def construction_sets_from_basis(basis):

@@ -32,6 +32,12 @@ impl ConstructionSet {
         js: &[usize],
         center_point: Option<&Vec<f64>>
     ) -> (Vec<Vec<f64>>, Vec<Vec<i32>>) {
+        println!("\n[RS] get_intersections_with details:");
+        println!("[RS] k_range: {}", k_range);
+        println!("[RS] self.normal: {:?}", self.normal);
+        println!("[RS] self.offset: {:?}", self.offset);
+        println!("[RS] others normals: {:?}", others.iter().map(|o| &o.normal).collect::<Vec<_>>());
+        println!("[RS] others offsets: {:?}", others.iter().map(|o| o.offset).collect::<Vec<_>>());
         let dimensions = self.normal.len();
         let mut coef_matrix = vec![self.normal.clone()];
         for other in others {
@@ -80,14 +86,14 @@ impl ConstructionSet {
                 {
                     let adjusted_k = k as f64 + center_idx;
                     current_ds.push(offset + adjusted_k);
-                    final_k_combo.push((offset + adjusted_k).ceil() as i32);
+                    final_k_combo.push(k + center_idx as i32);
                 }
             } else {
                 // Original logic for when no center point is provided
                 for (k, &offset) in k_combo.iter().zip(base_offsets.iter()) {
                     let value = offset + *k as f64;
                     current_ds.push(value);
-                    final_k_combo.push(value.ceil() as i32);
+                    final_k_combo.push(*k);
                 }
             }
             
@@ -106,16 +112,6 @@ impl ConstructionSet {
                 (0..result.nrows())
                     .map(|row| result[(row, col)])
                     .collect()
-            })
-            .collect();
-
-        // For each intersection, calculate its gridspace indices
-        let final_k_combos: Vec<Vec<i32>> = intersections.iter()
-            .map(|intersection| {
-                // Use gridspace to get the indices
-                let indices = basis.gridspace(intersection);
-                // Only take the indices corresponding to js
-                js.iter().map(|&j| indices[j]).collect()
             })
             .collect();
 
@@ -230,45 +226,114 @@ fn get_neighbours(
     intersection: &[f64],
     js: &[usize],
     ks: &[i32],
-    basis: &Basis
+    basis: &Basis,
+    cell_index: usize
 ) -> Vec<Vec<i32>> {
-    let mut indices = basis.gridspace(intersection);
-    let original_indices = indices.clone();
-
-    for (index, &j) in js.iter().enumerate() {
-        indices[j] = ks[index];
-    }
-    
-    for i in 0..indices.len() {
-        if !js.contains(&i) {
-            indices[i] = original_indices[i];
+    if cell_index == 2 {
+        println!("\n[RS] Cell 2 neighbour calculation:");
+        println!("[RS] Input intersection: {:?}", intersection);
+        println!("[RS] Input js: {:?}", js);
+        println!("[RS] Input ks: {:?}", ks);
+        
+        let mut indices = basis.gridspace(intersection);
+        println!("[RS] Initial gridspace indices: {:?}", indices);
+        
+        for (index, &j) in js.iter().enumerate() {
+            indices[j] = ks[index];
         }
-    }
-
-    let directions: Vec<Vec<i32>> = (0..js.len())
-        .map(|_| vec![0, 1])
-        .multi_cartesian_product()
-        .collect();
-
-    let deltas: Vec<Vec<i32>> = (0..js.len())
-        .map(|i| {
-            (0..basis.vecs.len())
-                .map(|j| if js[i] == j { 1 } else { 0 })
-                .collect()
-        })
-        .collect();
-
-    directions.iter()
-        .map(|direction| {
-            let mut neighbour = indices.clone();
-            for (i, &e) in direction.iter().enumerate() {
-                for (j, delta) in deltas[i].iter().enumerate() {
-                    neighbour[j] += e * delta;
+        println!("[RS] After setting js indices: {:?}", indices);
+        
+        let directions: Vec<Vec<i32>> = (0..basis.dimensions)
+            .map(|_| vec![0, 1])
+            .multi_cartesian_product()
+            .collect();
+        println!("[RS] Directions: {:?}", directions);
+        
+        let deltas: Vec<Vec<i32>> = (0..basis.dimensions)
+            .map(|i| {
+                (0..basis.vecs.len())
+                    .map(|j| if js.contains(&j) && js.iter().position(|&x| x == j).unwrap() == i { 1 } else { 0 })
+                    .collect()
+            })
+            .collect();
+        println!("[RS] Deltas: {:?}", deltas);
+        
+        let neighbours = directions.iter()
+            .map(|direction| {
+                let mut neighbour = indices.clone();
+                for (i, &e) in direction.iter().enumerate() {
+                    for (j, delta) in deltas[i].iter().enumerate() {
+                        neighbour[j] += e * delta;
+                    }
                 }
+                neighbour
+            })
+            .collect();
+        println!("[RS] Final neighbours: {:?}", neighbours);
+        
+        neighbours
+    } else {
+        let should_log = cell_index == 1 || cell_index == 2;
+        let mut indices = basis.gridspace(intersection);
+        
+        if should_log {
+            println!("\n[RS] Cell {}: Initial gridspace indices: {:?}", cell_index, indices);
+        }
+        
+        let original_indices = indices.clone();
+        
+        for (index, &j) in js.iter().enumerate() {
+            indices[j] = ks[index];
+        }
+        if should_log {
+            println!("[RS] Cell {}: After setting js indices: {:?}", cell_index, indices);
+        }
+        
+        for i in 0..indices.len() {
+            if !js.contains(&i) {
+                indices[i] = original_indices[i];
             }
-            neighbour
-        })
-        .collect()
+        }
+        if should_log {
+            println!("[RS] Cell {}: After restoring non-js indices: {:?}", cell_index, indices);
+        }
+
+        let directions: Vec<Vec<i32>> = (0..basis.dimensions)
+            .map(|_| vec![0, 1])
+            .multi_cartesian_product()
+            .collect();
+        if should_log {
+            println!("[RS] Cell {}: Directions: {:?}", cell_index, directions);
+        }
+
+        let deltas: Vec<Vec<i32>> = (0..basis.dimensions)
+            .map(|i| {
+                (0..basis.vecs.len())
+                    .map(|j| if js.contains(&j) && js.iter().position(|&x| x == j).unwrap() == i { 1 } else { 0 })
+                    .collect()
+            })
+            .collect();
+        if should_log {
+            println!("[RS] Cell {}: Deltas: {:?}", cell_index, deltas);
+        }
+
+        let neighbours = directions.iter()
+            .map(|direction| {
+                let mut neighbour = indices.clone();
+                for (i, &e) in direction.iter().enumerate() {
+                    for (j, delta) in deltas[i].iter().enumerate() {
+                        neighbour[j] += e * delta;
+                    }
+                }
+                neighbour
+            })
+            .collect();
+        if should_log {
+            println!("[RS] Cell {}: Final neighbours: {:?}", cell_index, neighbours);
+        }
+        
+        neighbours
+    }
 }
 
 fn get_cells_from_construction_sets(
@@ -283,13 +348,22 @@ fn get_cells_from_construction_sets(
         .map(|&j| construction_sets[j].clone())
         .collect();
 
+    // Add debug info before intersection calculation
+    println!("\n[RS] Calculating intersections for js: {:?}", js);
+    println!("[RS] First normal: {:?}", construction_sets[js[0]].normal);
+    println!("[RS] Other normals: {:?}", others.iter().map(|cs| &cs.normal).collect::<Vec<_>>());
+
     let (intersections, k_combos) = construction_sets[js[0]]
         .get_intersections_with(k_range, &others, basis, js, center_point);
     
+    // Add debug info after intersection calculation
+    println!("[RS] First two intersections: {:?}", &intersections[..2.min(intersections.len())]);
+    println!("[RS] First two k_combos: {:?}", &k_combos[..2.min(k_combos.len())]);
+
     let mut cells = Vec::new();
     
     for (i, (intersection, k_combo)) in intersections.iter().zip(k_combos.iter()).enumerate() {
-        let indices_set = get_neighbours(intersection, js, k_combo, basis);
+        let indices_set = get_neighbours(intersection, js, k_combo, basis, i);
         let vertices_set: Vec<Vec<f64>> = indices_set.iter()
             .map(|indices| basis.realspace(indices))
             .collect();
@@ -297,13 +371,14 @@ fn get_cells_from_construction_sets(
         let cell = Cell::new(vertices_set.clone(), indices_set.clone(), intersection.to_vec());
         cells.push(cell);
 
-        // Only log information for cells 1 and 2
+        // Only log for cells 1 and 2
         if cells.len() == 2 || cells.len() == 3 {
-            println!("[RS] Cell {}:", cells.len() - 1);
-            println!("[RS]   Intersection: {:?}", intersection);
-            println!("[RS]   k_combo: {:?}", k_combo);
-            println!("[RS]   Indices set: {:?}", indices_set);
-            println!("[RS]   Vertices set: {:?}", vertices_set);
+            println!("\n[RS] Processing cell {}", cells.len() - 1);
+            println!("[RS] js: {:?}", js);
+            println!("[RS] Intersection: {:?}", intersection);
+            println!("[RS] k_combo: {:?}", k_combo);
+            println!("[RS] Indices set: {:?}", indices_set);
+            println!("[RS] Vertices set: {:?}", vertices_set);
         }
     }
 
