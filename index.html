@@ -509,7 +509,7 @@
         init();
 
         // Load cells_out.json automatically
-        fetch('cells_out.json')
+        fetch('cells_out_rs.json')
             .then(response => response.json())
             .then(jsonData => {
                 loadCells(jsonData);

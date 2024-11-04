@@ -273,6 +273,14 @@ def export_cells_to_json(cells, filepath, center_point=None):
         cells: List of Cell objects to export
         filepath: Path to save the JSON file
     """
+    # Debug prints for only cells 2 and 3
+    print("Pre-export cell vertices:")
+    for i, cell in enumerate(cells):
+        if i in [1, 2]:  # Only show cells at index 2 and 3
+            print(f"Cell {i}:")
+            for j, vert in enumerate(cell.verts):
+                print(f"  Vertex {j}: [{vert[0]}, {vert[1]}, {vert[2]}]")
+    
     data = cells_to_dict(cells, center_point)
     
     with open(filepath, 'w') as f:

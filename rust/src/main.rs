@@ -39,24 +39,12 @@ fn main() {
     .collect();
 
     println!("number of cells: {}", cells.len());
-    println!("Cells found.\nFiltering...");
-    
-    // Filter cells within a cube
-    let r = 2.0;
-    let filtered_cells = utils::filter_cells(
-        cells,
-        utils::is_point_within_cube,
-        &[r * 2.0],
-        center_point,
-        false,
-        false,
-        false
-    );
+    println!("Cells found.");
     
     // Export cells to JSON
     utils::export_cells_to_json(
-        &filtered_cells,
-        "../cells_out.json",
+        &cells,
+        "../cells_out_rs.json",
         center_point
     ).expect("Failed to export cells to JSON");
     

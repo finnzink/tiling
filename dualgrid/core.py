@@ -4,14 +4,12 @@ from multiprocessing import Pool
 from functools import partial
 
 def _get_k_combos(k_range, dimensions):
-    print(f"[PY] k_range input: {k_range}")
     """
     Returns all possible comparison between two sets of lines for dimension number "dimensions" and max k_range (index range)
     If center_point is provided, the k_range will be centered around that point in real space.
     """
 
     range_list = [k for k in range(-k_range, k_range + 1)]
-    print(f"[PY] k_combo range: {range_list}")
     return np.array(list(itertools.product(*[
         range_list
         for d in range(dimensions)
@@ -38,8 +36,6 @@ class ConstructionSet:
         Calculates all intersections between this set of lines/planes and another.
         center_point: Point in real space to center the k_range around
         """
-        print(f"[PY] Computing intersections with k_range: {k_range}")
-        
         dimensions = len(self.normal)
         coef_matrix = np.array([self.normal, *[o.normal for o in others]])
 
@@ -49,7 +45,6 @@ class ConstructionSet:
 
         coef_inv = np.linalg.inv(coef_matrix)
         k_combos = _get_k_combos(k_range, dimensions)
-        print(f"[PY] Generated {len(k_combos)} k_combos")
 
         # Get the base offsets
         base_offsets = np.array([self.offset, *[o.offset for o in others]])
@@ -74,14 +69,6 @@ class ConstructionSet:
         # print("k_combos after adjustment:\n", k_combos)
         # print("Intersections:\n", intersections)
 
-        print(f"[PY] ds matrix shape: {ds.shape}")
-        print(f"[PY] First few ds values: {ds[:5]}")
-        print(f"[PY] First intersection: {intersections[0]}")
-
-        print("[PY] ds matrix:\n", np.asmatrix(ds).T)
-        print("[PY] coef_inv:\n", coef_inv)
-        print("[PY] Result before transpose:\n", coef_inv * np.asmatrix(ds).T)
-
         return intersections, k_combos
 
 def _get_neighbours(intersection, js, ks, basis):
@@ -93,19 +80,13 @@ def _get_neighbours(intersection, js, ks, basis):
     There will always be a set number of neighbours depending on the number of dimensions. For 2D this is 4 (to form a tile),
     for 3D this is 8 (to form a cube), etc...
     """
-    print("[PY] get_neighbours input:")
-    print(f"[PY]   js: {js}")
-    print(f"[PY]   ks: {ks}")
     
     # Get initial indices
     indices = basis.gridspace(intersection)
-    print(f"[PY] Gridspace returned indices: {indices}")
     
     # Load known indices
     for i, j in enumerate(js):
         indices[j] = ks[i]
-    print(f"[PY] After loading known indices: {indices}")
-    print(f"[PY] Initial indices: {indices}")
 
     # Each possible neighbour of intersection. See eq. 4.5 in de Bruijn paper
     # For example:
@@ -122,10 +103,6 @@ def _get_neighbours(intersection, js, ks, basis):
     # Apply equation 4.5 in de Bruijn's paper 1, expanded for any basis len and extra third dimension
     for i, e in enumerate(directions): # e Corresponds to epsilon in paper
         neighbours[i] += np.dot(e, deltas)
-    
-    print(f"[PY] Initial indices: {indices}")
-    print(f"[PY] Deltas: {deltas}")
-    print(f"[PY] First neighbour: {directions[0]}")
 
     return neighbours
 
@@ -155,16 +132,10 @@ class Basis:
         """
         out = np.zeros(len(self.vecs), dtype=int)
         for j, e in enumerate(self.vecs):
-            print(f"[PY] Vec {j}: {e}")
             dot = np.dot(r, e)
-            print(f"[PY] Dot product {j}: {dot}")
-            print(f"[PY] Offset {j}: {self.offsets[j]}")
             value = dot - self.offsets[j]
-            print(f"[PY] Pre-ceil value {j}: {value}")
             ceil_value = int(np.ceil(value))
-            print(f"[PY] Ceil value {j}: {ceil_value}")
             out[j] = ceil_value
-        print(f"[PY] Final gridspace indices: {out}")
         return out
 
     def get_possible_cells(self, decimals):
@@ -249,35 +220,33 @@ def get_edges_from_indices(indices):
     return np.array(edges)
 
 def _get_cells_from_construction_sets(construction_sets, k_range, basis, shape_accuracy, js, center_point=None):
-    print(f"[PY] Getting cells for js: {js}")
-    
     intersections, k_combos = construction_sets[js[0]].get_intersections_with(
         k_range, 
         [construction_sets[j] for j in js[1:]], 
         center_point=center_point
     )
     
-    print(f"[PY] Found {len(intersections)} intersections for js {js}")
-    
     cells = []
     for i, intersection in enumerate(intersections):
-        print(f"[PY] Creating cell from intersection: {intersection}")
-        print(f"[PY] Using k_combo: {k_combos[i]}")
-        
         # Calculate neighbours for this intersection
         indices_set = _get_neighbours(intersection, js, k_combos[i], basis)
-        print(f"[PY] Generated indices set: {indices_set}")
         
         vertices_set = []
         for indices in indices_set:
             vertex = basis.realspace(indices)
-            print(f"[PY] Generated vertex: {vertex} from indices: {indices}")
             vertices_set.append(vertex)
 
         vertices_set = np.array(vertices_set)
-        print(f"[PY] Final vertices set: {vertices_set}")
         c = Cell(vertices_set, indices_set, intersection)
         cells.append(c)
+        
+        # Only log information for cells 2 and 3
+        if len(cells) in [2, 3]:  # indices 2 and 3
+            print(f"[PY] Cell {len(cells)-1}:")
+            print(f"[PY]   Intersection: {intersection}")
+            print(f"[PY]   k_combo: {k_combos[i]}")
+            print(f"[PY]   Indices set: {indices_set}")
+            print(f"[PY]   Vertices set: {vertices_set}")
 
     return cells
 
@@ -304,7 +273,6 @@ def dualgrid_method(basis, k_range, center_point=None, shape_accuracy=4, single_
             new_cells = _get_cells_from_construction_sets(
                 construction_sets, k_range, basis, shape_accuracy, js, center_point
             )
-            print(f"[PY] Found {len(new_cells)} cells for combo {js}")
             cells.extend(new_cells)
     else:
         # Use a `Pool` to distribute work between CPU cores.

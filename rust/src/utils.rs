@@ -364,6 +364,17 @@ pub fn cells_to_dict(cells: &[Cell], center_point: Option<Vector3>) -> Value {
 }
 
 pub fn export_cells_to_json(cells: &[Cell], filepath: &str, center_point: Option<Vector3>) -> std::io::Result<()> {
+    // Debug prints for only cells 2 and 3
+    println!("Pre-export cell vertices:");
+    for (i, cell) in cells.iter().enumerate() {
+        if i == 1 || i == 2 {
+            println!("Cell {}:", i);
+            for (j, vert) in cell.verts.iter().enumerate() {
+                println!("  Vertex {}: [{}, {}, {}]", j, vert[0], vert[1], vert[2]);
+            }
+        }
+    }
+    
     let data = cells_to_dict(cells, center_point);
     let file = std::fs::File::create(filepath)?;
     serde_json::to_writer_pretty(file, &data)?;

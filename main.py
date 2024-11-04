@@ -12,14 +12,7 @@ def main():
     cells = dg.dualgrid_method(basis, k_range, center_point=center_point, single_threaded=True)
     print("number of cells:", len(cells))
     
-    print("Cells found.\nFiltering...")
-    # Filter the output cells by some function. Pre-defined ones are: is_point_within_cube, is_point_within_radius, elements_are_below, contains_value. Each one can be toggled
-    # to use the real space positions of vertices, or their indices in grid space.
-    
-    R = 2 # Reduce for 3D+ to reduce lag
-    cells = dg.utils.filter_cells(cells, filter=dg.utils.is_point_within_cube, filter_args=[R*2], filter_centre=center_point)
-    
-    # print("Number of cells filtered:", len(cells))
+    print("Cells found.")
     
     dg.utils.export_cells_to_json(cells, "../cells_out_py.json", center_point=center_point)
     print("DONE :)")
