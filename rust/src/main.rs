@@ -7,7 +7,7 @@ fn main() {
     let basis = utils::icosahedral_basis(false, HashMap::new());
     println!("Basis offsets: {:?}", basis.offsets());
     
-    let k_range = 2;
+    let k_range = 0;
     
     // Convert center_point to Vector3
     let center_point = Some(na::Vector3::new(10.0, -10.0, 10.0));
@@ -18,7 +18,7 @@ fn main() {
         k_range,
         center_point.as_ref().map(|v| vec![v[0], v[1], v[2]]),
         4,
-        false
+        true
     )
     .into_iter()
     .map(|c| utils::Cell {
