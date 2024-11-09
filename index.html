@@ -91,6 +91,9 @@
         let debugMode = false;
         let debugText;
 
+        // Add with other global variables
+        let colemakMode = true;
+
         // Add this function before init()
         function createDebugText() {
             const div = document.createElement('div');
@@ -110,30 +113,43 @@
         // Define these functions before init()
         function onKeyDown(event) {
             switch (event.code) {
-                case 'KeyW': moveState.forward = true; break;
-                case 'KeyS': moveState.backward = true; break;
-                case 'KeyA': moveState.left = true; break;
-                case 'KeyD': moveState.right = true; break;
-                case 'Space': moveState.up = true; break;
-                case 'ShiftLeft': moveState.down = true; break;
+                case colemakMode ? 'KeyF' : 'KeyW': moveState.forward = true; break;
+                case colemakMode ? 'KeyS' : 'KeyS': moveState.backward = true; break;
+                case colemakMode ? 'KeyR' : 'KeyA': moveState.left = true; break;
+                case colemakMode ? 'KeyT' : 'KeyD': moveState.right = true; break;
+                case colemakMode ? 'ShiftLeft' : 'Space': moveState.up = true; break;
+                case colemakMode ? 'Backspace' : 'ShiftLeft': moveState.down = true; break;
                 case 'KeyB': 
                     debugMode = !debugMode;
-                    debugText.style.display = debugMode ? 'block' : 'none';
+                    updateDebugText();
                     if (coiSphere) coiSphere.visible = debugMode;
                     if (coiBox) coiBox.visible = debugMode;
+                    break;
+                case 'KeyC':
+                    colemakMode = !colemakMode;
+                    updateDebugText();
                     break;
             }
         }
 
         function onKeyUp(event) {
             switch (event.code) {
-                case 'KeyW': moveState.forward = false; break;
-                case 'KeyS': moveState.backward = false; break;
-                case 'KeyA': moveState.left = false; break;
-                case 'KeyD': moveState.right = false; break;
-                case 'Space': moveState.up = false; break;
-                case 'ShiftLeft': moveState.down = false; break;
+                case colemakMode ? 'KeyF' : 'KeyW': moveState.forward = false; break;
+                case colemakMode ? 'KeyS' : 'KeyS': moveState.backward = false; break;
+                case colemakMode ? 'KeyR' : 'KeyA': moveState.left = false; break;
+                case colemakMode ? 'KeyT' : 'KeyD': moveState.right = false; break;
+                case colemakMode ? 'ShiftLeft' : 'Space': moveState.up = false; break;
+                case colemakMode ? 'Backspace' : 'ShiftLeft': moveState.down = false; break;
             }
+        }
+
+        function updateDebugText() {
+            let text = [];
+            if (debugMode) text.push('Debug Mode: ON');
+            if (colemakMode) text.push('Colemak Mode: ON');
+            
+            debugText.textContent = text.join(' | ');
+            debugText.style.display = text.length > 0 ? 'block' : 'none';
         }
 
         function init() {
@@ -517,6 +533,8 @@
             .catch(error => {
                 console.error('Error loading cells_out.json:', error);
             });
+        
+        updateDebugText();
     </script>
 </body>
 </html>
