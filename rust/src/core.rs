@@ -216,14 +216,16 @@ pub struct Cell {
     verts: Vec<Vec<f64>>,
     indices: Vec<Vec<i32>>,
     intersection: Vec<f64>,
+    filled: bool,
 }
 
 impl Cell {
-    pub fn new(vertices: Vec<Vec<f64>>, indices: Vec<Vec<i32>>, intersection: Vec<f64>) -> Self {
+    pub fn new(vertices: Vec<Vec<f64>>, indices: Vec<Vec<i32>>, intersection: Vec<f64>, is_first: bool) -> Self {
         Self {
             verts: vertices,
             indices,
             intersection,
+            filled: is_first,
         }
     }
 
@@ -386,7 +388,8 @@ fn get_cells_from_construction_sets(
             .map(|indices| basis.realspace(indices))
             .collect();
 
-        let cell = Cell::new(vertices_set.clone(), indices_set.clone(), intersection.to_vec());
+        let is_first = cells.is_empty(); // Only true for the first cell
+        let cell = Cell::new(vertices_set.clone(), indices_set.clone(), intersection.to_vec(), is_first);
         cells.push(cell);
 
         // Only log for cells 1 and 2

@@ -265,9 +265,9 @@
                 camera.rotateX(pitch);        // Then rotate up/down
             }
             
-            // Update mouse position for raycasting
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            // Always use screen center (where crosshair is) for raycasting
+            mouse.x = 0; // Center of screen in normalized device coordinates
+            mouse.y = 0; // Center of screen in normalized device coordinates
 
             raycaster.setFromCamera(mouse, camera);
             // Only check intersections with non-ghost cells

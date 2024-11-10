@@ -282,12 +282,21 @@ pub fn cells_to_dict(cells: &[Cell], center_point: Option<Vector3>) -> Value {
     let mut cells_map = serde_json::Map::new();
     let mut triangles_map = serde_json::Map::new();
 
+    // Track if we've marked a cell as filled
+    let mut has_filled_cell = false;
+
     // Process cells first
     for cell in cells {
         let cell_uuid = Uuid::new_v4().to_string();
         let cell_center = cell.verts.iter().sum::<Vector3>() / cell.verts.len() as f64;
         
-        let serializable_cell = cell.to_serializable();
+        let mut serializable_cell = cell.to_serializable();
+        // Only mark the first cell as filled
+        serializable_cell.filled = !has_filled_cell;
+        if !has_filled_cell {
+            has_filled_cell = true;
+        }
+        
         let mut adjusted_face_indices = Vec::new();
         
         for face_indices in FACE_INDICES.iter() {
