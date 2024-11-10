@@ -1,16 +1,41 @@
+use lambda_runtime::{service_fn, Error, LambdaEvent};
+use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
 use dualgrid::{core, utils};
 use std::collections::HashMap;
 use nalgebra as na;
 
-fn main() {
+#[derive(Deserialize)]
+struct Request {
+    center_point: Option<Vec<f64>>,
+    k_range: Option<i32>,
+    cube_size: Option<f64>,
+}
+
+#[derive(Serialize)]
+struct Response {
+    statusCode: i32,
+    headers: HashMap<String, String>,
+    body: String,
+    isBase64Encoded: bool,
+    cookies: Vec<String>,
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    lambda_runtime::run(service_fn(handler)).await
+}
+
+async fn handler(event: LambdaEvent<Request>) -> Result<Value, Error> {
+    let payload = event.payload;
+    
     // Create an icosahedral basis
     let basis = utils::icosahedral_basis(false, HashMap::new());
-    println!("Basis offsets: {:?}", basis.offsets());
     
-    let k_range = 2;
+    let k_range = payload.k_range.unwrap_or(2);
     
     // Convert center_point to Vector3
-    let center_point = Some(na::Vector3::new(10.0, -10.0, 10.0));
+    let center_point = payload.center_point.map(|v| na::Vector3::new(v[0], v[1], v[2]));
     
     // Get cells
     let cells: Vec<utils::Cell> = core::dualgrid_method(
@@ -37,29 +62,33 @@ fn main() {
         filled: true,
     })
     .collect();
-
-    println!("number of cells: {}", cells.len());
-    println!("Cells found.");
     
-    // Filter cells to keep only those within a cube of size 8 (radius 4)
+    // Filter cells to keep only those within a cube
+    let cube_size = payload.cube_size.unwrap_or(8.0);
     let filtered_cells = utils::filter_cells(
         cells,
         utils::is_point_within_cube,
-        &[4.0],  // size parameter (2 * radius)
+        &[cube_size/2.0],  // size parameter (2 * radius)
         center_point,
-        false,   // fast_filter
-        false,   // filter_indices
-        false,   // invert_filter
+        false,
+        false,
+        false,
     );
     
-    println!("number of cells after filtering: {}", filtered_cells.len());
+    // Convert cells to JSON response
+    let body = utils::cells_to_dict(&filtered_cells, center_point);
     
-    // Export filtered cells to JSON
-    utils::export_cells_to_json(
-        &filtered_cells,
-        "../cells_out_rs.json",
-        center_point
-    ).expect("Failed to export cells to JSON");
+    // Format response for API Gateway
+    let response = Response {
+        statusCode: 200,
+        headers: HashMap::from([
+            ("Content-Type".to_string(), "application/json".to_string()),
+            ("Access-Control-Allow-Origin".to_string(), "*".to_string()),
+        ]),
+        body: serde_json::to_string(&body)?,
+        isBase64Encoded: false,
+        cookies: Vec::new(),
+    };
     
-    println!("DONE :)");
+    Ok(json!(response))
 }
