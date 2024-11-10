@@ -9,3 +9,4 @@ tests/testout/*.npy
 rust/target/
 .aider*
 .env
+web/node_modules/

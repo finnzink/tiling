@@ -1,0 +1,50 @@
+body { 
+    margin: 0; 
+}
+
+canvas { 
+    display: block; 
+}
+
+#fileInput {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1000;
+    width: 20px;
+    height: 20px;
+    mix-blend-mode: difference;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background: white;
+}
+
+.crosshair::before {
+    width: 2px;
+    height: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.crosshair::after {
+    width: 20px;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+}
