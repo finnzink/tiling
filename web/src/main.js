@@ -8,6 +8,9 @@ let scene, camera, renderer;
 let debugMode = false;
 let debugText;
 
+// Replace the fetch URL with environment variable or CloudFront URL
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 function init() {
     // Scene setup
     scene = new THREE.Scene();
@@ -86,8 +89,8 @@ function animate() {
 // Initialize everything
 init();
 
-// Replace the JSON file loading with API call
-fetch('http://localhost:9000/lambda-url/dualgrid/', {
+// Update the fetch call
+fetch(`${API_URL}/dualgrid`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -98,8 +101,15 @@ fetch('http://localhost:9000/lambda-url/dualgrid/', {
         cube_size: 8.0
     })
 })
-.then(response => response.json())
-.then(jsonData => {
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(response => {
+    // Parse the inner JSON string in the body
+    const jsonData = JSON.parse(response.body);
     loadCells(jsonData);
 })
 .catch(error => {

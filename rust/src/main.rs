@@ -17,8 +17,8 @@ struct Response {
     statusCode: i32,
     headers: HashMap<String, String>,
     body: String,
-    isBase64Encoded: bool,
-    cookies: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    isBase64Encoded: Option<bool>,
 }
 
 #[tokio::main]
@@ -26,7 +26,7 @@ async fn main() -> Result<(), Error> {
     lambda_runtime::run(service_fn(handler)).await
 }
 
-async fn handler(event: LambdaEvent<Request>) -> Result<Value, Error> {
+async fn handler(event: LambdaEvent<Request>) -> Result<Response, Error> {
     let payload = event.payload;
     
     // Create an icosahedral basis
@@ -78,17 +78,14 @@ async fn handler(event: LambdaEvent<Request>) -> Result<Value, Error> {
     // Convert cells to JSON response
     let body = utils::cells_to_dict(&filtered_cells, center_point);
     
-    // Format response for API Gateway
-    let response = Response {
+    // Create and return the API Gateway response directly
+    Ok(Response {
         statusCode: 200,
         headers: HashMap::from([
             ("Content-Type".to_string(), "application/json".to_string()),
             ("Access-Control-Allow-Origin".to_string(), "*".to_string()),
         ]),
-        body: serde_json::to_string(&body)?,
-        isBase64Encoded: false,
-        cookies: Vec::new(),
-    };
-    
-    Ok(json!(response))
+        body: serde_json::to_string(&body)?,  // Serialize the body to a string
+        isBase64Encoded: None,
+    })
 }

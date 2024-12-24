@@ -10,3 +10,4 @@ rust/target/
 .aider*
 .env
 web/node_modules/
+web/dist/
