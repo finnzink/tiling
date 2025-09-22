@@ -1,4 +1,4 @@
-# Project Name
+# 3D Penrose Tiling
 
 A web application using Rust Lambda, Three.js frontend, and AWS infrastructure.
 
